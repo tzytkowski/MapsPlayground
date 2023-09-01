@@ -1,0 +1,11 @@
+{
+  "name": "playground",
+  "version": "1.0.0",
+  "description": "Messing around with Google Maps API",
+  "main": "index.html",
+  "scripts": {
+    "test": "vv"
+  },
+  "author": "Tyler Zytkowski",
+  "license": "ISC"
+}

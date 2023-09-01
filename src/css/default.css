@@ -1,0 +1,13 @@
+body {
+    background-color: rgba(0, 0, 0, 0.592);
+}
+
+#map {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5%;
+    height: 750px;
+    width: 1000px;
+    border-radius: 1%;
+}
