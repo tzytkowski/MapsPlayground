@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Maps Playground</title>
     <link rel="stylesheet" href="css/default.css" type="text/css">
-    <script src="https://maps.googleapis.com/maps/api/js?key=&libraries=places"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBrJ554PTXvcs0wARbCs74L7_ou8DuojYE&libraries=places"></script>
   </head>
   <body>
     <main>
@@ -25,13 +25,19 @@
                 function initMap() {
                         // Center of Poland
                     const position = {
-                    lat: 52.08163349195989,
-                    lng: 19.740549093905518,
+                    lat: 50.85218427095049,
+                    lng: 23.363589536779955,
+
                     };
 
                     map = new google.maps.Map(document.getElementById("map"), {
-                    zoom: 5,
+                    zoom: 14,
                     center: position,
+                    heading: 0,
+                    tilt: 47.5,
+                    mapId: 'dc8fe6b345586f78',
+                    mapTypeId: google.maps.MapTypeId.SATELLITE
+                    /*
                     styles: [
                         { elementType: "geometry", stylers: [{ color: "#242f3e" }] },
                         { elementType: "labels.text.stroke", stylers: [{ color: "#242f3e" }] },
@@ -39,9 +45,10 @@
                         {
                             featureType: "administrative.locality",
                             elementType: "labels.text.fill",
-                            stylers: [{ color: "#d59563" }],
+                                 //Set color to show
+                            stylers: [{ visibility: "off" }],
                         },
-                        {
+                        {          //Place of Interest
                             featureType: "poi",
                             elementType: "labels.text.fill",
                             stylers: [{ color: "#d59563" }],
@@ -107,7 +114,17 @@
                             stylers: [{ color: "#17263c" }],
                         },
                         ],
+                        */
                     });
+// Optional: subscribe to map capability changes.
+map.addListener('mapcapabilities_changed', () => {
+  const mapCapabilities = map.getMapCapabilities();
+
+  if (!mapCapabilities.isDataDrivenStylingAvailable) {
+    // Data-driven styling is *not* available, add a fallback.
+    // Existing feature layers are also unavailable.
+  }
+});
                         //GEOCODER
                     geocoder = new google.maps.Geocoder();
                 }
@@ -122,26 +139,17 @@
                             position: results[0].geometry.location,
                         });
                     } else {
-                        alert("Geocode was not successful for the following reason: " + status);
+                        alert("Geocode was not successful because: " + status);
                     }
                 });
             }
-
-            
-            
-        
             window.initMap = initMap;
-
             // Call the function
             function init() {
                 initMap();
             }
         
-
-    
             </script>
-            <script src="https://maps.googleapis.com/maps/api/js?key=&libraries=places&callback=init"></script>
-
-                
+            <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBrJ554PTXvcs0wARbCs74L7_ou8DuojYE&libraries=places&callback=init"></script>
     </body>
 </html>
