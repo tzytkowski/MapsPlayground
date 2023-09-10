@@ -1,5 +1,10 @@
 body {
-    background-color: rgba(0, 0, 0, 0.522);
+    background-color: rgba(0, 0, 0, 0.592);
+}
+
+#firstSection {
+    height: 100vh;
+    background-color: rgba(143, 11, 11, 0.667);
 }
 
 #map {
@@ -7,7 +12,34 @@ body {
     margin-left: auto;
     margin-right: auto;
     margin-top: 5%;
-    height: 750px;
-    width: 90%;
+    height: 900px;
+    width: 100%;
+    box-shadow: 2px 2px 64px 15px black;
     border-radius: 1%;
+}
+
+#addressHeader {
+
+}
+
+#secondSection {
+    height: 100vh;
+    background-color: rgba(68, 144, 78, 0.581);
+    display: grid;
+    grid-template-columns: repeat(5, 1fr); /* 5 columns with equal width */
+    grid-template-rows: repeat(5, 1fr); /* 5 rows with equal height */
+}
+
+#thirdSection {
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.398);
+}
+
+#englandMap {
+    border-radius: 5%;
+    box-shadow: 2px 2px 64px 2px black;
+}
+#russiaMap {
+    border-radius: 5%;
+    box-shadow: 2px 2px 64px 2px black;
 }
