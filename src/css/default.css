@@ -13,12 +13,14 @@ body {
     margin-right: auto;
     margin-top: 5%;
     height: 900px;
-    width: 100%;
+    width: 94vw;
     box-shadow: 2px 2px 64px 15px black;
     border-radius: 1%;
 }
 
 #addressHeader {
+    text-align: center;
+    padding-top: 2%;
 
 }
 
@@ -26,7 +28,7 @@ body {
     height: 100vh;
     background-color: rgba(68, 144, 78, 0.581);
     display: grid;
-    grid-template-columns: repeat(5, 1fr); /* 5 columns with equal width */
+    grid-template-columns: repeat(3, 1fr); /* 5 columns with equal width */
     grid-template-rows: repeat(5, 1fr); /* 5 rows with equal height */
 }
 
@@ -35,11 +37,15 @@ body {
     background-color: rgba(0, 0, 0, 0.398);
 }
 
+.thumbnailMaps {
+    border-radius: 2%;
+}
+
 #englandMap {
-    border-radius: 5%;
+
     box-shadow: 2px 2px 64px 2px black;
 }
 #russiaMap {
-    border-radius: 5%;
+
     box-shadow: 2px 2px 64px 2px black;
 }

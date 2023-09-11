@@ -1,155 +1,215 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Maps Playground</title>
-    <link rel="stylesheet" href="css/default.css" type="text/css">
-    <script src="https://maps.googleapis.com/maps/api/js?key=****************&libraries=places"></script>
+    <link rel="stylesheet" href="css/default.css" type="text/css" />
+    <script src="https://maps.googleapis.com/maps/api/js?key=***************&libraries=places"></script>
   </head>
   <body>
     <main>
-        <div>
-            <label for="address">Enter an Address:</label>
-            <input type="text" id="address" placeholder="Enter an address">
-            <button onclick="geocodeAddress()">Geocode</button>
+      <div id="firstSection">
+        <div id="addressHeader">
+          <label for="address">Enter an Address:</label>
+          <input type="text" id="address" placeholder="Enter an address" />
+          <button onclick="geocodeAddress()">Geocode</button>
         </div>
-      <div id="map">
-  
-      </div>
-        <script>
-                let map;
-                let geocoder;
-
-                function initMap() {
-                        // Center of Poland
-                    const position = {
-                    lat: 50.85218427095049,
-                    lng: 23.363589536779955,
-
-                    };
-
-                    map = new google.maps.Map(document.getElementById("map"), {
-                    zoom: 14,
-                    center: position,
-                    heading: 0,
-                    tilt: 47.5,
-                    mapId: 'dc8fe6b345586f78',
-                    mapTypeId: google.maps.MapTypeId.SATELLITE
-                    /*
-                    styles: [
-                        { elementType: "geometry", stylers: [{ color: "#242f3e" }] },
-                        { elementType: "labels.text.stroke", stylers: [{ color: "#242f3e" }] },
-                        { elementType: "labels.text.fill", stylers: [{ color: "#746855" }] },
-                        {
-                            featureType: "administrative.locality",
-                            elementType: "labels.text.fill",
-                                 //Set color to show
-                            stylers: [{ visibility: "off" }],
-                        },
-                        {          //Place of Interest
-                            featureType: "poi",
-                            elementType: "labels.text.fill",
-                            stylers: [{ color: "#d59563" }],
-                        },
-                        {
-                            featureType: "poi.park",
-                            elementType: "geometry",
-                            stylers: [{ color: "#263c3f" }],
-                        },
-                        {
-                            featureType: "poi.park",
-                            elementType: "labels.text.fill",
-                            stylers: [{ color: "#6b9a76" }],
-                        },
-                        {
-                            featureType: "road",
-                            elementType: "geometry.stroke",
-                            stylers: [{ visibility: "off" }], // Set road geometry stroke visibility to off
-                        },
-                        {
-                            featureType: "road",
-                            elementType: "labels.text.fill",
-                            stylers: [{ color: "#9ca5b3" }],
-                        },
-                        {
-                            featureType: "road.highway",
-                            elementType: "geometry",
-                            stylers: [{ visibility: "off" }],
-                        },
-                        {
-                            featureType: "road.highway",
-                            elementType: "geometry.stroke",
-                            stylers: [{ visibility: "off" }], // Set highway geometry stroke visibility to off
-                        },
-                        {
-                            featureType: "road.highway",
-                            elementType: "labels.text.fill",
-                            stylers: [{ color: "#f3d19c" }],
-                        },
-                        {
-                            featureType: "transit",
-                            elementType: "geometry",
-                            stylers: [{ color: "#2f3948" }],
-                        },
-                        {
-                            featureType: "transit.station",
-                            elementType: "labels.text.fill",
-                            stylers: [{ color: "#d59563" }],
-                        },
-                        {
-                            featureType: "water",
-                            elementType: "geometry",
-                            stylers: [{ color: "#17263c" }],
-                        },
-                        {
-                            featureType: "water",
-                            elementType: "labels.text.fill",
-                            stylers: [{ color: "#515c6d" }],
-                        },
-                        {
-                            featureType: "water",
-                            elementType: "labels.text.stroke",
-                            stylers: [{ color: "#17263c" }],
-                        },
-                        ],
-                        */
-                    });
-// Optional: subscribe to map capability changes.
-map.addListener('mapcapabilities_changed', () => {
-  const mapCapabilities = map.getMapCapabilities();
-
-  if (!mapCapabilities.isDataDrivenStylingAvailable) {
-    // Data-driven styling is *not* available, add a fallback.
-    // Existing feature layers are also unavailable.
-  }
-});
-                        //GEOCODER
-                    geocoder = new google.maps.Geocoder();
+        <div id="map">
+          <script>
+            let mainMap;
+            let geocoder;
+            function initMainMap() {
+              // Skierbieszow, Poland
+              const mainMapPosition = {
+                lat: 50.85218427095049,
+                lng: 23.363589536779955,
+              };
+              mainMap = new google.maps.Map(document.getElementById("map"), {
+                zoom: 14,
+                center: mainMapPosition,
+                heading: 0,
+                tilt: 47.5,
+                mapId: "dc8fe6b345586f78",
+                mapTypeId: google.maps.MapTypeId.SATELLITE,
+              });
+              // Add any markers, polygons, or other map features for the main map here.
+              // Initialize the geocoder
+              geocoder = new google.maps.Geocoder();
+            }
+            // Function to geocode an address and add a marker
+            function geocodeAddress() {
+              const address = document.getElementById("address").value;
+              geocoder.geocode({ address: address }, (results, status) => {
+                if (status === "OK") {
+                  mainMap.setCenter(results[0].geometry.location);
+                  new google.maps.Marker({
+                    map: mainMap,
+                    position: results[0].geometry.location,
+                  });
+                } else {
+                  alert("Geocode was not successful because: " + status);
                 }
-                function geocodeAddress() {
-                const address = document.getElementById("address").value;
-
-                geocoder.geocode({ address: address }, (results, status) => {
-                    if (status === "OK") {
-                        map.setCenter(results[0].geometry.location);
-                        new google.maps.Marker({
-                            map: map,
-                            position: results[0].geometry.location,
-                        });
-                    } else {
-                        alert("Geocode was not successful because: " + status);
-                    }
-                });
+              });
             }
-            window.initMap = initMap;
-            // Call the function
-            function init() {
-                initMap();
+            // Call the function to initialize the main map
+            initMainMap();
+          </script>
+        </div>
+      </div>
+      <div id="secondSection">
+        <figure id="englandMap" class="thumbnailMaps">
+          <script>
+            let englandMap;
+            function initEnglandMap() {
+              // Coordinates for England (Update with actual coordinates)
+              const englandPosition = {
+                lat: 52.147668148804875,
+                lng: -1.1833647285296276,
+              };
+              englandMap = new google.maps.Map(
+                document.getElementById("englandMap"),
+                {
+                  zoom: 5,
+                  center: englandPosition,
+                  mapTypeId: google.maps.MapTypeId.SATELLITE,
+                  disableDefaultUI: true,
+                }
+              );
+              // Add any markers, polygons, or other map features for England here.
             }
-        
-            </script>
-            <script src="https://maps.googleapis.com/maps/api/js?key=*************&libraries=places&callback=init"></script>
-    </body>
+            // Call the function to initialize the England map
+            initEnglandMap();
+          </script>
+          <figcaption>England</figcaption>
+        </figure>
+        <figure id="sardiniaMap" class="thumbnailMaps">
+          <script>
+            let sardiniaMap;
+            function initSardiniaMap() {
+              // Coordinates for England (Update with actual coordinates)
+              const sardiniaPosition = {
+                lat: 40.114695548939046,
+                lng: 9.02915493270814,
+              };
+              sardiniaMap = new google.maps.Map(
+                document.getElementById("sardiniaMap"),
+                {
+                  zoom: 6,
+                  center: sardiniaPosition,
+                  mapTypeId: google.maps.MapTypeId.SATELLITE,
+                  disableDefaultUI: true,
+                }
+              );
+              // Add any markers, polygons, or other map features for England here.
+            }
+            // Call the function to initialize the England map
+            initSardiniaMap();
+          </script>
+          <figcaption>Sardinia</figcaption>
+        </figure>
+        <figure id="russiaMap" class="thumbnailMaps">
+          <script>
+            let russiaMap;
+            function initRussiaMap() {
+              // Coordinates for England (Update with actual coordinates)
+              const russiaPosition = {
+                lat: 55.97940963731233,
+                lng: 37.59416261891285,
+              };
+              russiaMap = new google.maps.Map(
+                document.getElementById("russiaMap"),
+                {
+                  zoom: 3,
+                  center: russiaPosition,
+                  mapTypeId: google.maps.MapTypeId.SATELLITE,
+                  disableDefaultUI: true,
+                }
+              );
+              // Add any markers, polygons, or other map features for England here.
+            }
+            // Call the function to initialize the England map
+            initRussiaMap();
+          </script>
+          <figcaption>Russia</figcaption>
+        </figure>
+        <figure id="balticMap" class="thumbnailMaps">
+          <script>
+            let balticMap;
+            function initBalticMap() {
+              // Coordinates for England (Update with actual coordinates)
+              const balticPosition = {
+                lat: 59.89409592429186,
+                lng: 30.38438132860243,
+              };
+              balticMap = new google.maps.Map(
+                document.getElementById("balticMap"),
+                {
+                  zoom: 3,
+                  center: balticPosition,
+                  mapTypeId: google.maps.MapTypeId.SATELLITE,
+                  disableDefaultUI: true,
+                }
+              );
+              // Add any markers, polygons, or other map features for England here.
+            }
+            // Call the function to initialize the England map
+            initBalticMap();
+          </script>
+          <figcaption>Baltic</figcaption>
+        </figure>
+        <figure id="austriaMap" class="thumbnailMaps">
+          <figcaption>Austria</figcaption>
+          <script>
+            let austriaMap;
+            function initAustriaMap() {
+              // Coordinates for England (Update with actual coordinates)
+              const austriaPosition = {
+                lat: 47.789537773056516,
+                lng: 13.041702653991571,
+              };
+              salzburgMap = new google.maps.Map(
+                document.getElementById("austriaMap"),
+                {
+                  zoom: 4.4,
+                  center: austriaPosition,
+                  mapTypeId: google.maps.MapTypeId.SATELLITE,
+                  disableDefaultUI: true,
+                }
+              );
+              // Add any markers, polygons, or other map features for England here.
+            }
+            // Call the function to initialize the England map
+            initAustriaMap();
+          </script>
+        </figure>
+        <figure id="greeceMap" class="thumbnailMaps">
+          <script>
+            let greeceMap;
+            function initGreeceMap() {
+              // Coordinates for England (Update with actual coordinates)
+              const greecePosition = {
+                lat: 38.45298675904039,
+                lng: 23.163102742583845,
+              };
+              greeceMap = new google.maps.Map(
+                document.getElementById("greeceMap"),
+                {
+                  zoom: 6,
+                  center: greecePosition,
+                  mapTypeId: google.maps.MapTypeId.SATELLITE,
+                  disableDefaultUI: true,
+                }
+              );
+              // Add any markers, polygons, or other map features for England here.
+            }
+            // Call the function to initialize the England map
+            initGreeceMap();
+          </script>
+          <figcaption>Greece</figcaption>
+        </figure>
+      </div>
+    </main>
+  </body>
 </html>
