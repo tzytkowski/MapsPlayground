@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Maps Playground</title>
     <link rel="stylesheet" href="css/default.css" type="text/css" />
-    <script src="https://maps.googleapis.com/maps/api/js?key=***************&libraries=places"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=*****************&libraries=places"></script>
   </head>
   <body>
     <main>
@@ -85,30 +85,76 @@
           <figcaption>England</figcaption>
         </figure>
         <figure id="sardiniaMap" class="thumbnailMaps">
-          <script>
-            let sardiniaMap;
-            function initSardiniaMap() {
-              // Coordinates for England (Update with actual coordinates)
-              const sardiniaPosition = {
+            <script>
+              let sardiniaMap;
+              let sardiniaPosition = {
                 lat: 40.114695548939046,
                 lng: 9.02915493270814,
               };
-              sardiniaMap = new google.maps.Map(
-                document.getElementById("sardiniaMap"),
-                {
-                  zoom: 6,
-                  center: sardiniaPosition,
-                  mapTypeId: google.maps.MapTypeId.SATELLITE,
-                  disableDefaultUI: true,
-                }
-              );
-              // Add any markers, polygons, or other map features for England here.
-            }
-            // Call the function to initialize the England map
-            initSardiniaMap();
-          </script>
-          <figcaption>Sardinia</figcaption>
-        </figure>
+          
+              function initSardiniaMap() {
+                sardiniaMap = new google.maps.Map(
+                  document.getElementById("sardiniaMap"),
+                  {
+                    zoom: 6,
+                    center: sardiniaPosition,
+                    mapTypeId: google.maps.MapTypeId.SATELLITE,
+                    disableDefaultUI: true,
+                  }
+                );
+          
+                // Create a blue polygon overlay for the entire map
+                var bluePolygon = new google.maps.Polygon({
+                  paths: [
+                    { lat: 38.906, lng: 8.85678 },
+                    { lat: 39.973, lng: 8.405 },
+                    { lat: 41.25210, lng: 9.20502 },
+                    { lat: 40.10485, lng: 9.76448 },
+                  ],
+                  strokeColor: "blue",
+                  strokeOpacity: 0.8,
+                  strokeWeight: 2,
+                  fillColor: "blue",
+                  fillOpacity: 0.2,
+                });
+                bluePolygon.setMap(sardiniaMap);
+          
+                // Define the boundary coordinates of the country (Sardinia)
+                var sardiniaBoundary = [
+                  { lat: 39.87, lng: 8.12 },
+                  // Add other boundary coordinates here as needed.
+                ];
+          
+                // Create a yellow polygon overlay for the country (Sardinia)
+                var yellowPolygon = new google.maps.Polygon({
+                  paths: sardiniaBoundary,
+                  strokeColor: "yellow",
+                  strokeOpacity: 0.8,
+                  strokeWeight: 2,
+                  fillColor: "yellow",
+                  fillOpacity: 0.5,
+                });
+                yellowPolygon.setMap(sardiniaMap);
+          
+                // Add the marker with a label
+                var marker = new google.maps.Marker({
+                  position: sardiniaPosition,
+                  title: "Sardinia",
+                  label: {
+                    text: "Sardinia",
+                    color: "white",
+                  },
+                });
+          
+                marker.setMap(sardiniaMap); // Add the marker to the map
+              }
+          
+              // Call the function to initialize the Sardinia map
+              initSardiniaMap();
+            </script>
+            <figcaption>Sardinia</figcaption>
+          </figure>
+          
         <figure id="russiaMap" class="thumbnailMaps">
           <script>
             let russiaMap;
