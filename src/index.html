@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Maps Playground</title>
     <link rel="stylesheet" href="css/default.css" type="text/css" />
-    <script src="https://maps.googleapis.com/maps/api/js?key=*****************&libraries=places"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=****************&libraries=places"></script>
   </head>
   <body>
     <main>
@@ -61,22 +61,69 @@
       <div id="secondSection">
         <figure id="englandMap" class="thumbnailMaps">
           <script>
-            let englandMap;
             function initEnglandMap() {
               // Coordinates for England (Update with actual coordinates)
               const englandPosition = {
                 lat: 52.147668148804875,
                 lng: -1.1833647285296276,
               };
-              englandMap = new google.maps.Map(
+              // Create the England map
+              var englandMap = new google.maps.Map(
                 document.getElementById("englandMap"),
                 {
-                  zoom: 5,
-                  center: englandPosition,
+                  zoom: 6,
+                  center: englandPosition, // Assuming you have defined englandPosition
                   mapTypeId: google.maps.MapTypeId.SATELLITE,
                   disableDefaultUI: true,
                 }
               );
+
+              // Define styles for "England Road" and "England Landscape"
+              var englandRoadStyle = [
+                {
+                  featureType: "road",
+                  elementType: "geometry.fill",
+                  stylers: [
+                    {
+                      color: "#ff0000", // Set the color to red
+                      opacity: 0.2, // Adjust the opacity (0.0 to 1.0)
+                    },
+                  ],
+                },
+              ];
+
+              var englandLandscapeStyle = [
+                {
+                  featureType: "landscape",
+                  elementType: "geometry.fill",
+                  stylers: [
+                    {
+                      color: "#ffffff", // Set the color to white
+                      opacity: 0.2, // Adjust the opacity (0.0 to 1.0)
+                    },
+                  ],
+                },
+              ];
+
+              // Merge the styles of "England Road" and "England Landscape"
+              var englandCombinedStyles = englandRoadStyle.concat(
+                englandLandscapeStyle
+              );
+
+              // Create a custom map type with the combined style
+              var customMapType = new google.maps.StyledMapType(
+                englandCombinedStyles,
+                {
+                  name: "Custom Map",
+                }
+              );
+
+              // Set the custom map type to the England map
+              englandMap.mapTypes.set("custom_map", customMapType);
+
+              // Set the initial map type
+              englandMap.setMapTypeId("custom_map");
+
               // Add any markers, polygons, or other map features for England here.
             }
             // Call the function to initialize the England map
@@ -85,76 +132,87 @@
           <figcaption>England</figcaption>
         </figure>
         <figure id="sardiniaMap" class="thumbnailMaps">
-            <script>
-              let sardiniaMap;
-              let sardiniaPosition = {
-                lat: 40.114695548939046,
-                lng: 9.02915493270814,
-              };
-          
-              function initSardiniaMap() {
-                sardiniaMap = new google.maps.Map(
-                  document.getElementById("sardiniaMap"),
-                  {
-                    zoom: 6,
-                    center: sardiniaPosition,
-                    mapTypeId: google.maps.MapTypeId.SATELLITE,
-                    disableDefaultUI: true,
-                  }
-                );
-          
-                // Create a blue polygon overlay for the entire map
-                var bluePolygon = new google.maps.Polygon({
-                  paths: [
-                    { lat: 38.906, lng: 8.85678 },
-                    { lat: 39.973, lng: 8.405 },
-                    { lat: 41.25210, lng: 9.20502 },
-                    { lat: 40.10485, lng: 9.76448 },
+          <script>
+            let sardiniaMap;
+            let sardiniaPosition = {
+              lat: 40.114695548939046,
+              lng: 9.02915493270814,
+            };
+
+            function initSardiniaMap() {
+              sardiniaMap = new google.maps.Map(
+                document.getElementById("sardiniaMap"),
+                {
+                  zoom: 6,
+                  center: sardiniaPosition,
+                  mapTypeId: google.maps.MapTypeId.SATELLITE,
+                  disableDefaultUI: true,
+                }
+              );
+
+              var sardiniaRoadStyle = [
+                {
+                  featureType: "road",
+                  elementType: "geometry.fill",
+                  stylers: [
+                    {
+                      color: "#ff0000", // Set the color to red
+                      opacity: 0.2, // Adjust the opacity (0.0 to 1.0)
+                    },
                   ],
-                  strokeColor: "blue",
-                  strokeOpacity: 0.8,
-                  strokeWeight: 2,
-                  fillColor: "blue",
-                  fillOpacity: 0.2,
-                });
-                bluePolygon.setMap(sardiniaMap);
-          
-                // Define the boundary coordinates of the country (Sardinia)
-                var sardiniaBoundary = [
-                  { lat: 39.87, lng: 8.12 },
-                  // Add other boundary coordinates here as needed.
-                ];
-          
-                // Create a yellow polygon overlay for the country (Sardinia)
-                var yellowPolygon = new google.maps.Polygon({
-                  paths: sardiniaBoundary,
-                  strokeColor: "yellow",
-                  strokeOpacity: 0.8,
-                  strokeWeight: 2,
-                  fillColor: "yellow",
-                  fillOpacity: 0.5,
-                });
-                yellowPolygon.setMap(sardiniaMap);
-          
-                // Add the marker with a label
-                var marker = new google.maps.Marker({
-                  position: sardiniaPosition,
-                  title: "Sardinia",
-                  label: {
-                    text: "Sardinia",
-                    color: "white",
-                  },
-                });
-          
-                marker.setMap(sardiniaMap); // Add the marker to the map
-              }
-          
-              // Call the function to initialize the Sardinia map
-              initSardiniaMap();
-            </script>
-            <figcaption>Sardinia</figcaption>
-          </figure>
-          
+                },
+              ];
+
+              var landscapeStyle = [
+                {
+                  featureType: "landscape",
+                  elementType: "geometry.fill",
+                  stylers: [
+                    {
+                      color: "#000000", // Set the color to red
+                      opacity: 0.2, // Adjust the opacity (0.0 to 1.0)
+                    },
+                  ],
+                },
+              ];
+
+              var sardiniaRoadMapType = new google.maps.StyledMapType(
+                sardiniaRoadStyle,
+                {
+                  name: "Sardinia Road Map",
+                }
+              );
+              // Create a custom map type with the defined style
+              // Merge the styles of "Sardinia Road Map" and "Custom Map"
+              var combinedStyles = sardiniaRoadStyle.concat(landscapeStyle);
+
+              // Create a custom map type with the combined style
+              var customMapType = new google.maps.StyledMapType(
+                combinedStyles,
+                {
+                  name: "Custom Map",
+                }
+              );
+
+              // Set the custom map type to the map
+              sardiniaMap.mapTypes.set("custom_map", customMapType);
+
+              // Set the initial map type
+              sardiniaMap.setMapTypeId("custom_map");
+
+              
+
+              // Add any other markers or overlays you need
+            }
+
+            // Call the function to initialize the Sardinia map
+            initSardiniaMap();
+
+            // Add any other markers or overlays you nee
+          </script>
+          <figcaption>Sardinia</figcaption>
+        </figure>
+
         <figure id="russiaMap" class="thumbnailMaps">
           <script>
             let russiaMap;
@@ -167,12 +225,29 @@
               russiaMap = new google.maps.Map(
                 document.getElementById("russiaMap"),
                 {
-                  zoom: 3,
+                  zoom: 2,
                   center: russiaPosition,
                   mapTypeId: google.maps.MapTypeId.SATELLITE,
                   disableDefaultUI: true,
                 }
               );
+
+              // Create a blue polygon overlay for the region of interest
+              var russiaPolygon = new google.maps.Polygon({
+                paths: [
+                  { lat: 44.44570, lng: 33.96003 },
+                  { lat: 55.55250, lng: 69.08016 },
+                  { lat: 50.31657, lng: 96.86034 },
+                  { lat: 76.69024, lng: 111.60192 },
+                  { lat: 69.47901, lng: 31.56878 },
+                ],
+                strokeColor: "orange",
+                strokeOpacity: 0.8,
+                strokeWeight: 1,
+                fillColor: "orange",
+                fillOpacity: 0.5,
+              });
+              russiaPolygon.setMap(russiaMap);
               // Add any markers, polygons, or other map features for England here.
             }
             // Call the function to initialize the England map
