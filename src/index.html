@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Maps Playground</title>
     <link rel="stylesheet" href="css/default.css" type="text/css" />
-    <script src="https://maps.googleapis.com/maps/api/js?key=****************&libraries=places"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=******************&libraries=places"></script>
   </head>
   <body>
     <main>
@@ -59,6 +59,7 @@
         </div>
       </div>
       <div id="secondSection">
+        <!--  ENGLAND    -->
         <figure id="englandMap" class="thumbnailMaps">
           <script>
             function initEnglandMap() {
@@ -131,25 +132,55 @@
           </script>
           <figcaption>England</figcaption>
         </figure>
+
+        <!--  SARDINIA    -->
         <figure id="sardiniaMap" class="thumbnailMaps">
           <script>
             let sardiniaMap;
-            let sardiniaPosition = {
-              lat: 40.114695548939046,
-              lng: 9.02915493270814,
-            };
-
             function initSardiniaMap() {
+              // Coordinates for Sardinia (Update with actual coordinates)
+              const sardiniaPosition = {
+                lat: 40.13105927700096,
+                lng: 8.987519690734556,
+              };
               sardiniaMap = new google.maps.Map(
                 document.getElementById("sardiniaMap"),
                 {
-                  zoom: 6,
+                  zoom: 5,
                   center: sardiniaPosition,
                   mapTypeId: google.maps.MapTypeId.SATELLITE,
                   disableDefaultUI: true,
                 }
               );
 
+              // Create a blue polygon overlay for the region of interest
+              var sardiniaPolygon = new google.maps.Polygon({
+                paths: [
+                  { lat: 38.834299815855076, lng: 8.860155099457492 },
+                  { lat: 38.95751483520321, lng: 8.351283797009991 },
+                  { lat: 39.229586699903386, lng: 8.18166002952749 },
+                  { lat: 39.91817587196092, lng: 8.373900299340992 },
+                  { lat: 40.59132354950388, lng: 8.045961015541492 },
+                  { lat: 41.14762356782349, lng: 8.326758782028087 },
+                  { lat: 40.868933132183734, lng: 8.490257933776475 },
+                  { lat: 41.25776244998171, lng: 9.15416962976049 },
+                  { lat: 41.16418470079313, lng: 9.60649967638049 },
+                  { lat: 40.505396966317484, lng: 9.86658945318699 },
+                  { lat: 40.05680315688145, lng: 9.776123443862991 },
+                  { lat: 39.10684552286256, lng: 9.549958420552992 },
+                  { lat: 39.168242887211605, lng: 9.15416962976049 },
+                  { lat: 38.92233235935309, lng: 8.961929359946991 },
+                ],
+                strokeColor: "red",
+                strokeOpacity: 0.8,
+                strokeWeight: 2,
+                fillColor: " #89DC1A",
+                fillOpacity: 0.4,
+              });
+              sardiniaPolygon.setMap(sardiniaMap);
+              // Add any markers, polygons, or other map features for Sardinia here.
+
+              // Define styles for "Sardinia Road" and "Sardinia Landscape"
               var sardiniaRoadStyle = [
                 {
                   featureType: "road",
@@ -163,56 +194,59 @@
                 },
               ];
 
-              var landscapeStyle = [
+              var sardiniaLandscapeStyle = [
                 {
                   featureType: "landscape",
                   elementType: "geometry.fill",
                   stylers: [
                     {
-                      color: "#000000", // Set the color to red
+                      color: "#ffffff", // Set the color to white
                       opacity: 0.2, // Adjust the opacity (0.0 to 1.0)
                     },
                   ],
                 },
               ];
 
-              var sardiniaRoadMapType = new google.maps.StyledMapType(
-                sardiniaRoadStyle,
+              var sardiniaLabelStyle = [
                 {
-                  name: "Sardinia Road Map",
-                }
+                  featureType: "all",
+                  elementType: "labels.text.fill",
+                  stylers: [
+                    {
+                      visibility: "off",
+                      color: "#000000", // Set the color to blue
+                    },
+                  ],
+                },
+              ];
+
+              // Merge the styles of "Sardinia Road" and "Sardinia Landscape"
+              var sardiniaCombinedStyles = sardiniaRoadStyle.concat(
+                sardiniaLandscapeStyle,
+                sardiniaLabelStyle
               );
-              // Create a custom map type with the defined style
-              // Merge the styles of "Sardinia Road Map" and "Custom Map"
-              var combinedStyles = sardiniaRoadStyle.concat(landscapeStyle);
 
               // Create a custom map type with the combined style
               var customMapType = new google.maps.StyledMapType(
-                combinedStyles,
+                sardiniaCombinedStyles,
                 {
                   name: "Custom Map",
                 }
               );
 
-              // Set the custom map type to the map
+              // Set the custom map type to the Sardinia map
               sardiniaMap.mapTypes.set("custom_map", customMapType);
 
               // Set the initial map type
               sardiniaMap.setMapTypeId("custom_map");
-
-              
-
-              // Add any other markers or overlays you need
             }
 
             // Call the function to initialize the Sardinia map
             initSardiniaMap();
-
-            // Add any other markers or overlays you nee
           </script>
-          <figcaption>Sardinia</figcaption>
         </figure>
 
+        <!-- RUSSIA    -->
         <figure id="russiaMap" class="thumbnailMaps">
           <script>
             let russiaMap;
@@ -235,44 +269,132 @@
               // Create a blue polygon overlay for the region of interest
               var russiaPolygon = new google.maps.Polygon({
                 paths: [
-                  { lat: 44.44570, lng: 33.96003 },
-                  { lat: 55.55250, lng: 69.08016 },
-                  { lat: 50.31657, lng: 96.86034 },
-                  { lat: 76.69024, lng: 111.60192 },
-                  { lat: 69.47901, lng: 31.56878 },
+                  { lat: 44.4457, lng: 33.96003 },
+                  { lat: 52.383650636057226, lng: 55.829212625161816 },
+                  { lat: 54.330301458666284, lng: 76.78099294258436 },
+                  { lat: 52.028226769650495, lng: 94.68787802935438 },
+                  { lat: 63.18453428339078, lng: 106.14248456967537 },
+                  { lat: 75.74681989080455, lng: 114.62469381054953 },
+                  { lat: 76.91126570009683, lng: 113.75472369356311 },
+                  { lat: 77.83021939257156, lng: 104.47504244145088 },
+                  { lat: 73.6248190304172, lng: 70.90869412504098 },
+                  { lat: 69.89341545244764, lng: 60.10656517245978 },
+                  { lat: 68.76773453271507, lng: 44.73709310569997 },
+                  { lat: 69.56691213647129, lng: 31.470048821657297 },
+                  { lat: 59.97914830132598, lng: 30.165093646177688 },
+
                 ],
-                strokeColor: "orange",
+                strokeColor: "blue",
                 strokeOpacity: 0.8,
-                strokeWeight: 1,
-                fillColor: "orange",
-                fillOpacity: 0.5,
+                strokeWeight: 2,
+                fillColor: "red",
+                fillOpacity: 0.7,
               });
               russiaPolygon.setMap(russiaMap);
               // Add any markers, polygons, or other map features for England here.
+
+              // Define styles for "England Road" and "England Landscape"
+              var russiaRoadStyle = [
+                {
+                  featureType: "road",
+                  elementType: "geometry.fill",
+                  stylers: [
+                    {
+                      color: "#0000ff", // Set the color to red
+                      opacity: 0.2, // Adjust the opacity (0.0 to 1.0)
+                    },
+                  ],
+                },
+              ];
+
+              var russiaLandscapeStyle = [
+                {
+                  featureType: "landscape",
+                  elementType: "geometry.fill",
+                  stylers: [
+                    {
+                      color: "#ffffff", // Set the color to white
+                      opacity: 0.2, // Adjust the opacity (0.0 to 1.0)
+                    },
+                  ],
+                },
+              ];
+
+              var russiaLabelStyle = [
+                {
+                  featureType: "all",
+                  elementType: "labels.text.fill",
+                  stylers: [
+                    {
+                      color: "#0000ff", // Set the color to blue
+                    },
+                  ],
+                },
+              ];
+
+              // Merge the styles of "England Road" and "England Landscape"
+              var russiaCombinedStyles = russiaRoadStyle.concat(
+                russiaLandscapeStyle,
+                russiaLabelStyle
+              );
+
+              // Create a custom map type with the combined style
+              var customMapType = new google.maps.StyledMapType(
+                russiaCombinedStyles,
+                {
+                  name: "Custom Map",
+                }
+              );
+
+              // Set the custom map type to the England map
+              russiaMap.mapTypes.set("custom_map", customMapType);
+
+              // Set the initial map type
+              russiaMap.setMapTypeId("custom_map");
             }
+
             // Call the function to initialize the England map
             initRussiaMap();
           </script>
           <figcaption>Russia</figcaption>
         </figure>
+
+        <!--  BALTIC    -->
         <figure id="balticMap" class="thumbnailMaps">
           <script>
             let balticMap;
             function initBalticMap() {
               // Coordinates for England (Update with actual coordinates)
               const balticPosition = {
-                lat: 59.89409592429186,
-                lng: 30.38438132860243,
+                lat: 56.94886874500302,
+                lng: 24.247627982192903,
               };
               balticMap = new google.maps.Map(
                 document.getElementById("balticMap"),
                 {
-                  zoom: 3,
+                  zoom: 3.3,
                   center: balticPosition,
                   mapTypeId: google.maps.MapTypeId.SATELLITE,
                   disableDefaultUI: true,
                 }
               );
+              var balticPolygon = new google.maps.Polygon({
+                paths: [
+                  { lat: 54.68794, lng: 20.43886 },
+                  { lat: 56.58736197852191, lng: 21.06479049118483 },
+                  { lat: 58.67043826494737, lng: 21.988308033517914 },
+                  { lat: 59.592645069068986, lng: 25.220619431683705 },
+                  { lat: 56.405300680871946, lng: 28.2880169830043 },
+                  { lat: 55.668281379807844, lng: 26.68835266860593 },
+                ],
+                strokeColor: "green",
+                strokeOpacity: 0.8,
+                strokeWeight: 1,
+                fillColor: "orange",
+                fillOpacity: 0.5,
+              });
+
+              balticPolygon.setMap(balticMap);
               // Add any markers, polygons, or other map features for England here.
             }
             // Call the function to initialize the England map
@@ -280,17 +402,18 @@
           </script>
           <figcaption>Baltic</figcaption>
         </figure>
+
+        <!--  AUSTRIA    -->
         <figure id="austriaMap" class="thumbnailMaps">
           <figcaption>Austria</figcaption>
           <script>
-            let austriaMap;
             function initAustriaMap() {
               // Coordinates for England (Update with actual coordinates)
               const austriaPosition = {
                 lat: 47.789537773056516,
                 lng: 13.041702653991571,
               };
-              salzburgMap = new google.maps.Map(
+              var austriaMap = new google.maps.Map(
                 document.getElementById("austriaMap"),
                 {
                   zoom: 4.4,
@@ -299,35 +422,107 @@
                   disableDefaultUI: true,
                 }
               );
-              // Add any markers, polygons, or other map features for England here.
+
+              // Polygon
+              var austriaPolygon = new google.maps.Polygon({
+                paths: [
+                  { lat: 47.683510361483926, lng: 12.168195678637915 },
+                  { lat: 47.28698703183143, lng: 11.592858369318948 },
+                  { lat: 47.219746121595485, lng: 12.667329370828542 },
+                  { lat: 47.5396663661055, lng: 14.286656234805767 },
+                  { lat: 48.107581674346385, lng: 14.869613905837564 },
+                  { lat: 48.636568138949066, lng: 14.458114373344532 },
+                  { lat: 47.92627507852276, lng: 12.842689670984344 },
+                ],
+                strokeColor: "yellow",
+                strokeOpacity: 0.8,
+                strokeWeight: 1,
+                fillColor: "yellow",
+                fillOpacity: 0.5,
+              });
+              austriaPolygon.setMap(austriaMap);
             }
             // Call the function to initialize the England map
             initAustriaMap();
           </script>
         </figure>
+
+        <!--  GREECE    -->
         <figure id="greeceMap" class="thumbnailMaps">
           <script>
-            let greeceMap;
             function initGreeceMap() {
-              // Coordinates for England (Update with actual coordinates)
+              // Coordinates for Greece (Update with actual coordinates)
               const greecePosition = {
                 lat: 38.45298675904039,
                 lng: 23.163102742583845,
               };
-              greeceMap = new google.maps.Map(
+              var greeceMap = new google.maps.Map(
                 document.getElementById("greeceMap"),
                 {
-                  zoom: 6,
+                  zoom: 5,
                   center: greecePosition,
                   mapTypeId: google.maps.MapTypeId.SATELLITE,
                   disableDefaultUI: true,
                 }
               );
-              // Add any markers, polygons, or other map features for England here.
+
+              var greeceLandscapeStyle = [
+                {
+                  featureType: "landscape",
+                  elementType: "geometry.fill",
+                  stylers: [
+                    {
+                      color: "#0d5eaf", // Set the color to black
+                      opacity: 0.2, // Adjust the opacity (0.0 to 1.0)
+                    },
+                  ],
+                },
+              ];
+
+              var greeceRoadStyle = [
+                {
+                  featureType: "road",
+                  elementType: "geometry.fill",
+                  stylers: [
+                    {
+                      color: "#ffffff", // Set the color to red
+                      opacity: 0.9, // Adjust the opacity (0.0 to 1.0)
+                    },
+                  ],
+                },
+              ];
+
+              var greeceLabelStyle = [
+                {
+                  featureType: "all",
+                  elementType: "labels.text.fill",
+                  stylers: [
+                    {
+                      color: "#0d5eaf", // White
+                      strokeColor: "#ffffff", // Border = blue
+                    },
+                  ],
+                },
+              ];
+
+              // Create a custom map type with the combined style
+              var customMapType = new google.maps.StyledMapType(
+                greeceLandscapeStyle.concat(greeceLabelStyle, greeceRoadStyle),
+                {
+                  name: "Custom Map",
+                }
+              );
+
+              // Set the custom map type to the Greece map
+              greeceMap.mapTypes.set("custom_map", customMapType);
+
+              // Set the initial map type
+              greeceMap.setMapTypeId("custom_map");
             }
-            // Call the function to initialize the England map
+            // Call the function to initialize the Greece map
             initGreeceMap();
           </script>
+
           <figcaption>Greece</figcaption>
         </figure>
       </div>
