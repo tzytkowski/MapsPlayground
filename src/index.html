@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Maps Playground</title>
     <link rel="stylesheet" href="css/default.css" type="text/css" />
-    <script src="https://maps.googleapis.com/maps/api/js?key=******************&libraries=places"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=************&libraries=places"></script>
   </head>
   <body>
     <main>
@@ -59,8 +59,10 @@
         </div>
       </div>
       <div id="secondSection">
+
         <!--  ENGLAND    -->
-        <figure id="englandMap" class="thumbnailMaps">
+        
+        <figure id="englandMap" class="individualThumbnail">
           <script>
             function initEnglandMap() {
               // Coordinates for England (Update with actual coordinates)
@@ -134,7 +136,7 @@
         </figure>
 
         <!--  SARDINIA    -->
-        <figure id="sardiniaMap" class="thumbnailMaps">
+        <figure id="sardiniaMap" class="individualThumbnail">
           <script>
             let sardiniaMap;
             function initSardiniaMap() {
@@ -173,7 +175,7 @@
                 ],
                 strokeColor: "red",
                 strokeOpacity: 0.8,
-                strokeWeight: 2,
+                strokeWeight: 1,
                 fillColor: " #89DC1A",
                 fillOpacity: 0.4,
               });
@@ -187,8 +189,8 @@
                   elementType: "geometry.fill",
                   stylers: [
                     {
-                      color: "#ff0000", // Set the color to red
-                      opacity: 0.2, // Adjust the opacity (0.0 to 1.0)
+                      color: "#000000", // Set the color to red
+                      opacity: 0.7, // Adjust the opacity (0.0 to 1.0)
                     },
                   ],
                 },
@@ -200,7 +202,7 @@
                   elementType: "geometry.fill",
                   stylers: [
                     {
-                      color: "#ffffff", // Set the color to white
+                      color: "#909090", // Set the color to white
                       opacity: 0.2, // Adjust the opacity (0.0 to 1.0)
                     },
                   ],
@@ -213,7 +215,7 @@
                   elementType: "labels.text.fill",
                   stylers: [
                     {
-                      visibility: "off",
+                      visibility: "on",
                       color: "#000000", // Set the color to blue
                     },
                   ],
@@ -247,7 +249,7 @@
         </figure>
 
         <!-- RUSSIA    -->
-        <figure id="russiaMap" class="thumbnailMaps">
+        <figure id="russiaMap" class="individualThumbnail">
           <script>
             let russiaMap;
             function initRussiaMap() {
@@ -282,13 +284,12 @@
                   { lat: 68.76773453271507, lng: 44.73709310569997 },
                   { lat: 69.56691213647129, lng: 31.470048821657297 },
                   { lat: 59.97914830132598, lng: 30.165093646177688 },
-
                 ],
-                strokeColor: "blue",
+                strokeColor: "#E4181C",
                 strokeOpacity: 0.8,
                 strokeWeight: 2,
-                fillColor: "red",
-                fillOpacity: 0.7,
+                fillColor: "#1C3578",
+                fillOpacity: 0.8,
               });
               russiaPolygon.setMap(russiaMap);
               // Add any markers, polygons, or other map features for England here.
@@ -326,7 +327,8 @@
                   elementType: "labels.text.fill",
                   stylers: [
                     {
-                      color: "#0000ff", // Set the color to blue
+                      color: "#E4181C", // Set the color to blue
+                      strokeColor: "#E4181C",
                     },
                   ],
                 },
@@ -360,7 +362,7 @@
         </figure>
 
         <!--  BALTIC    -->
-        <figure id="balticMap" class="thumbnailMaps">
+        <figure id="balticMap" class="individualThumbnail">
           <script>
             let balticMap;
             function initBalticMap() {
@@ -404,7 +406,7 @@
         </figure>
 
         <!--  AUSTRIA    -->
-        <figure id="austriaMap" class="thumbnailMaps">
+        <figure id="austriaMap" class="individualThumbnail">
           <figcaption>Austria</figcaption>
           <script>
             function initAustriaMap() {
@@ -448,7 +450,7 @@
         </figure>
 
         <!--  GREECE    -->
-        <figure id="greeceMap" class="thumbnailMaps">
+        <figure id="greeceMap" class="individualThumbnail">
           <script>
             function initGreeceMap() {
               // Coordinates for Greece (Update with actual coordinates)
@@ -495,11 +497,21 @@
               var greeceLabelStyle = [
                 {
                   featureType: "all",
+                  elementType: "labels",
+                  stylers: [
+                    {
+                      visibility: "off",
+                    },
+                  ],
+                },
+                {
+                  featureType: "all",
                   elementType: "labels.text.fill",
                   stylers: [
                     {
                       color: "#0d5eaf", // White
-                      strokeColor: "#ffffff", // Border = blue
+                      strokeColor: "#ffffff",
+                      visibility: "off" // Border = blue
                     },
                   ],
                 },
