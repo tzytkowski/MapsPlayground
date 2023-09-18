@@ -4,7 +4,20 @@ body {
 
 #firstSection {
     height: 100vh;
-    background-color: rgba(143, 11, 11, 0.667);
+    background-color: rgba(38, 38, 38, 0.826);
+}
+
+#secondSection {
+    height: 100vh;    
+    background-color: rgba(38, 38, 38, 0.891);
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 5 columns with equal width */
+    grid-template-rows: repeat(2, 1fr); /* 5 rows with equal height */
+}
+
+#thirdSection {
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.398);
 }
 
 #map {
@@ -21,31 +34,31 @@ body {
 #addressHeader {
     text-align: center;
     padding-top: 2%;
-
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
-#secondSection {
-    height: 100vh;
-    background-color: rgba(68, 144, 78, 0.581);
-    display: grid;
-    grid-template-columns: repeat(3, 1fr); /* 5 columns with equal width */
-    grid-template-rows: repeat(5, 1fr); /* 5 rows with equal height */
+#addressHeader label {
+    color: rgb(244, 209, 114);
+    font-size: 12px;
 }
 
-#thirdSection {
-    height: 100vh;
-    background-color: rgba(0, 0, 0, 0.398);
+#addressHeader input {
+    background-color: rgba(220, 228, 233, 0.939);
+    padding: 0.5%;
+    border-radius: 5%;
+    font-size: 10px;
 }
 
-.thumbnailMaps {
+#addressHeader button {
+    color: rgba(27, 33, 36, 0.724);
+    background-color: rgb(244, 209, 114);
+    padding: 0.4%;
+    font-size: 10px;
+}
+
+
+.individualThumbnail {
     border-radius: 2%;
-}
-
-#englandMap {
-
-    box-shadow: 2px 2px 64px 2px black;
-}
-#russiaMap {
-
-    box-shadow: 2px 2px 64px 2px black;
+    box-shadow: 22px 22px 64px 2px black;
+    border: 3px solid black;
 }

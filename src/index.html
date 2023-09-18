@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Maps Playground</title>
     <link rel="stylesheet" href="css/default.css" type="text/css" />
-    <script src="https://maps.googleapis.com/maps/api/js?key=********************************&libraries=places"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBrJ554PTXvcs0wARbCs74L7_ou8DuojYE&libraries=places"></script>
   </head>
   <body>
     <main>
@@ -250,8 +250,7 @@
             let russiaMap;
             function initRussiaMap() {
               const russiaPosition = {
-                lat: 55.97940963731233,
-                lng: 37.59416261891285,
+                lat: 46.48839345150547, lng: 50.49899390163209
               };
               russiaMap = new google.maps.Map(
                 document.getElementById("russiaMap"),
@@ -266,7 +265,8 @@
               // Create a blue polygon overlay for the region of interest
               var russiaPolygon = new google.maps.Polygon({
                 paths: [
-                  { lat: 44.4457, lng: 33.96003 },
+                  { lat: 46.39247198376133, lng:32.56733379025783 },
+                  { lat: 45.52746362476204, lng:37.54479574902378},
                   { lat: 52.383650636057226, lng: 55.829212625161816 },
                   { lat: 54.330301458666284, lng: 76.78099294258436 },
                   { lat: 52.028226769650495, lng: 94.68787802935438 },
@@ -277,7 +277,7 @@
                   { lat: 73.6248190304172, lng: 70.90869412504098 },
                   { lat: 69.89341545244764, lng: 60.10656517245978 },
                   { lat: 68.76773453271507, lng: 44.73709310569997 },
-                  { lat: 69.56691213647129, lng: 31.470048821657297 },
+                  { lat: 69.27557773333619, lng: 34.1825391263166 },
                   { lat: 59.97914830132598, lng: 30.165093646177688 },
                 ],
                 strokeColor: "#E4181C",
