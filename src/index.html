@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Maps Playground</title>
     <link rel="stylesheet" href="css/default.css" type="text/css" />
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBrJ554PTXvcs0wARbCs74L7_ou8DuojYE&libraries=places"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=********************************&libraries=places"></script>
   </head>
   <body>
     <main>
@@ -20,10 +20,10 @@
           <script>
             let mainMap;
             let geocoder;
-            function initMainMap() {
+            async function initMainMap() {
               // Skierbieszow, Poland
               const mainMapPosition = {
-                lat: 50.85218427095049,
+                lat: 50.83218427095049,
                 lng: 23.363589536779955,
               };
               mainMap = new google.maps.Map(document.getElementById("map"), {
@@ -34,7 +34,88 @@
                 mapId: "dc8fe6b345586f78",
                 mapTypeId: google.maps.MapTypeId.SATELLITE,
               });
-              // Add any markers, polygons, or other map features for the main map here.
+
+              //Adding Marker
+              const svgMarker = {
+                path: "M-1.547 12l6.563-6.609-1.406-1.406-5.156 5.203-2.063-2.109-1.406 1.406zM0 0q2.906 0 4.945 2.039t2.039 4.945q0 1.453-0.727 3.328t-1.758 3.516-2.039 3.070-1.711 2.273l-0.75 0.797q-0.281-0.328-0.75-0.867t-1.688-2.156-2.133-3.141-1.664-3.445-0.75-3.375q0-2.906 2.039-4.945t4.945-2.039z",
+                fillColor: "red",
+                fillOpacity: 0.6,
+                strokeWeight: 0,
+                rotation: 0,
+                scale: 4,
+                anchor: new google.maps.Point(0, 20),
+              };
+
+              // Adding a marker to the map
+              const zytkowskiPosition = {
+                lat: 50.80547829014646,
+                lng: 23.317655335342476,
+              };
+
+              const kowalskiPosition = {
+                lat: 50.842826703783494,
+                lng: 23.416513553683984,
+              };
+
+              const kowalskiMarker = new google.maps.Marker({
+                map: mainMap,
+                position: kowalskiPosition,
+                label: "K",
+                icon: svgMarker,
+              });
+
+              const zytkowskiMarker = new google.maps.Marker({
+                map: mainMap,
+                position: zytkowskiPosition,
+                label: "Z",
+                icon: svgMarker,
+              });
+
+              const zytkowskiFamilyContent =
+                '<div id="content">' +
+                '<div id="siteNotice">' +
+                "</div>" +
+                '<h1 id="firstHeading" class="firstHeading">Zytkowski Family</h1>' +
+                '<div id="bodyContent">' +
+                "<p><b>Zrab-Kolonia</b>, also referred to as <b>Zrab</b>, is a village " +
+                "in the administrative district of " +
+                "Gmina Skierbieszów, within Zamość County, Lublin Voivodeship, in eastern Poland. " +
+                "It lies approximately 7 kilometres (4 mi) south-west of Skierbieszów, " +
+                "11 km (7 mi) north-east of Zamość, and 72 km (45 mi) south-east of the regional capital Lublin. " +
+                "The village has a population of 260. </p>";
+
+              const kowalskiFamilyContent =
+                '<div id="content">' +
+                '<div id="siteNotice">' +
+                "</div>" +
+                '<h1 id="firstHeading" class="firstHeading">Kowalski Family</h1>' +
+                '<div id="bodyContent">' +
+                "<p><b>Lipina Nowa</b>, also referred to as <b>Nowa Lipina</b>, is a village " +
+                "is a village in the administrative district of Gmina Skierbieszów, within Zamość County, Lublin Voivodeship, in eastern Poland. " +
+                "The village has a population of 220. </p>";
+
+              const zytkowskiInfoBox = new google.maps.InfoWindow({
+                content: zytkowskiFamilyContent,
+                maxWidth: 300,
+              });
+              zytkowskiMarker.addListener("click", () => {
+                zytkowskiInfoBox.open({
+                  anchor: zytkowskiMarker,
+                  mainMap,
+                });
+              });
+
+              const kowalskiInfoBox = new google.maps.InfoWindow({
+                content: kowalskiFamilyContent,
+                maxWidth: 300,
+              });
+              kowalskiMarker.addListener("click", () => {
+                kowalskiInfoBox.open({
+                  anchor: kowalskiMarker,
+                  mainMap,
+                });
+              });
+
               // Initialize the geocoder
               geocoder = new google.maps.Geocoder();
             }
@@ -58,522 +139,530 @@
           </script>
         </div>
       </div>
-      <div id="secondSection">
-        <!--  ENGLAND    -->
+      <div>
+        <div id="secondSection">
+          <!--  ENGLAND    -->
 
-        <figure id="englandMap" class="individualThumbnail">
-          <script>
-            function initEnglandMap() {
-              // Coordinates for England (Update with actual coordinates)
-              const englandPosition = {
-                lat: 52.147668148804875,
-                lng: -1.1833647285296276,
-              };
-              // Create the England map
-              var englandMap = new google.maps.Map(
-                document.getElementById("englandMap"),
-                {
-                  zoom: 6,
-                  center: englandPosition, // Assuming you have defined englandPosition
-                  mapTypeId: google.maps.MapTypeId.SATELLITE,
-                  disableDefaultUI: true,
-                }
-              );
+          <figure id="englandMap" class="individualThumbnail">
+            <script>
+              function initEnglandMap() {
+                // Coordinates for England (Update with actual coordinates)
+                const englandPosition = {
+                  lat: 52.147668148804875,
+                  lng: -1.1833647285296276,
+                };
+                // Create the England map
+                var englandMap = new google.maps.Map(
+                  document.getElementById("englandMap"),
+                  {
+                    zoom: 6,
+                    center: englandPosition, // Assuming you have defined englandPosition
+                    mapTypeId: google.maps.MapTypeId.SATELLITE,
+                    disableDefaultUI: true,
+                  }
+                );
 
-              // Define styles for "England Road" and "England Landscape"
-              var englandRoadStyle = [
-                {
-                  featureType: "road",
-                  elementType: "geometry.fill",
-                  stylers: [
-                    {
-                      color: "#ff0000",
-                      opacity: 0.2,
-                    },
+                // Define styles for "England Road" and "England Landscape"
+                var englandRoadStyle = [
+                  {
+                    featureType: "road",
+                    elementType: "geometry.fill",
+                    stylers: [
+                      {
+                        color: "#ff0000",
+                        opacity: 0.2,
+                      },
+                    ],
+                  },
+                ];
+
+                var englandLandscapeStyle = [
+                  {
+                    featureType: "landscape",
+                    elementType: "geometry.fill",
+                    stylers: [
+                      {
+                        color: "#ffffff",
+                        opacity: 0.2,
+                      },
+                    ],
+                  },
+                ];
+
+                // Merge the styles of "England Road" and "England Landscape"
+                var englandCombinedStyles = englandRoadStyle.concat(
+                  englandLandscapeStyle
+                );
+
+                // Create a custom map type with the combined style
+                var customMapType = new google.maps.StyledMapType(
+                  englandCombinedStyles,
+                  {
+                    name: "Custom Map",
+                  }
+                );
+
+                englandMap.mapTypes.set("custom_map", customMapType);
+
+                englandMap.setMapTypeId("custom_map");
+
+                // Add any markers, polygons, or other map features for England here.
+              }
+              // Call the function to initialize the England map
+              initEnglandMap();
+            </script>
+            <figcaption>England</figcaption>
+          </figure>
+
+          <!--  SARDINIA    -->
+          <figure id="sardiniaMap" class="individualThumbnail">
+            <script>
+              let sardiniaMap;
+              function initSardiniaMap() {
+                // Coordinates for Sardinia (Update with actual coordinates)
+                const sardiniaPosition = {
+                  lat: 40.13105927700096,
+                  lng: 8.987519690734556,
+                };
+                sardiniaMap = new google.maps.Map(
+                  document.getElementById("sardiniaMap"),
+                  {
+                    zoom: 5,
+                    center: sardiniaPosition,
+                    mapTypeId: google.maps.MapTypeId.SATELLITE,
+                    disableDefaultUI: true,
+                  }
+                );
+
+                // Create a blue polygon overlay for the region of interest
+                var sardiniaPolygon = new google.maps.Polygon({
+                  paths: [
+                    { lat: 38.834299815855076, lng: 8.860155099457492 },
+                    { lat: 38.95751483520321, lng: 8.351283797009991 },
+                    { lat: 39.229586699903386, lng: 8.18166002952749 },
+                    { lat: 39.91817587196092, lng: 8.373900299340992 },
+                    { lat: 40.59132354950388, lng: 8.045961015541492 },
+                    { lat: 41.14762356782349, lng: 8.326758782028087 },
+                    { lat: 40.868933132183734, lng: 8.490257933776475 },
+                    { lat: 41.25776244998171, lng: 9.15416962976049 },
+                    { lat: 41.16418470079313, lng: 9.60649967638049 },
+                    { lat: 40.505396966317484, lng: 9.86658945318699 },
+                    { lat: 40.05680315688145, lng: 9.776123443862991 },
+                    { lat: 39.10684552286256, lng: 9.549958420552992 },
+                    { lat: 39.168242887211605, lng: 9.15416962976049 },
+                    { lat: 38.92233235935309, lng: 8.961929359946991 },
                   ],
-                },
-              ];
+                  strokeColor: "red",
+                  strokeOpacity: 0.8,
+                  strokeWeight: 1,
+                  fillColor: " #89DC1A",
+                  fillOpacity: 0.4,
+                });
+                sardiniaPolygon.setMap(sardiniaMap);
+                // Add any markers, polygons, or other map features for Sardinia here.
 
-              var englandLandscapeStyle = [
-                {
-                  featureType: "landscape",
-                  elementType: "geometry.fill",
-                  stylers: [
-                    {
-                      color: "#ffffff",
-                      opacity: 0.2,
-                    },
+                // Define styles for "Sardinia Road" and "Sardinia Landscape"
+                var sardiniaRoadStyle = [
+                  {
+                    featureType: "road",
+                    elementType: "geometry.fill",
+                    stylers: [
+                      {
+                        color: "#000000",
+                        opacity: 0.7,
+                      },
+                    ],
+                  },
+                ];
+
+                var sardiniaLandscapeStyle = [
+                  {
+                    featureType: "landscape",
+                    elementType: "geometry.fill",
+                    stylers: [
+                      {
+                        color: "#909090",
+                        opacity: 0.2,
+                      },
+                    ],
+                  },
+                ];
+
+                var sardiniaLabelStyle = [
+                  {
+                    featureType: "all",
+                    elementType: "labels.text.fill",
+                    stylers: [
+                      {
+                        visibility: "on",
+                        color: "#000000",
+                      },
+                    ],
+                  },
+                ];
+
+                // Merge the styles of "Sardinia Road" and "Sardinia Landscape"
+                var sardiniaCombinedStyles = sardiniaRoadStyle.concat(
+                  sardiniaLandscapeStyle,
+                  sardiniaLabelStyle
+                );
+
+                // Create a custom map type with the combined style
+                var customMapType = new google.maps.StyledMapType(
+                  sardiniaCombinedStyles,
+                  {
+                    name: "Custom Map",
+                  }
+                );
+
+                // Set the custom map type to the Sardinia map
+                sardiniaMap.mapTypes.set("custom_map", customMapType);
+
+                sardiniaMap.setMapTypeId("custom_map");
+              }
+
+              // Call the function to initialize the Sardinia map
+              initSardiniaMap();
+            </script>
+          </figure>
+
+          <!-- RUSSIA    -->
+          <figure id="russiaMap" class="individualThumbnail">
+            <script>
+              let russiaMap;
+              function initRussiaMap() {
+                const russiaPosition = {
+                  lat: 46.48839345150547,
+                  lng: 50.49899390163209,
+                };
+                russiaMap = new google.maps.Map(
+                  document.getElementById("russiaMap"),
+                  {
+                    zoom: 2,
+                    center: russiaPosition,
+                    mapTypeId: google.maps.MapTypeId.SATELLITE,
+                    disableDefaultUI: true,
+                  }
+                );
+
+                // Create a blue polygon overlay for the region of interest
+                var russiaPolygon = new google.maps.Polygon({
+                  paths: [
+                    { lat: 46.39247198376133, lng: 32.56733379025783 },
+                    { lat: 45.52746362476204, lng: 37.54479574902378 },
+                    { lat: 52.383650636057226, lng: 55.829212625161816 },
+                    { lat: 54.330301458666284, lng: 76.78099294258436 },
+                    { lat: 52.028226769650495, lng: 94.68787802935438 },
+                    { lat: 63.18453428339078, lng: 106.14248456967537 },
+                    { lat: 75.74681989080455, lng: 114.62469381054953 },
+                    { lat: 76.91126570009683, lng: 113.75472369356311 },
+                    { lat: 77.83021939257156, lng: 104.47504244145088 },
+                    { lat: 73.6248190304172, lng: 70.90869412504098 },
+                    { lat: 69.89341545244764, lng: 60.10656517245978 },
+                    { lat: 68.76773453271507, lng: 44.73709310569997 },
+                    { lat: 69.27557773333619, lng: 34.1825391263166 },
+                    { lat: 59.97914830132598, lng: 30.165093646177688 },
                   ],
-                },
-              ];
+                  strokeColor: "#E4181C",
+                  strokeOpacity: 0.8,
+                  strokeWeight: 2,
+                  fillColor: "#1C3578",
+                  fillOpacity: 0.8,
+                });
+                russiaPolygon.setMap(russiaMap);
 
-              // Merge the styles of "England Road" and "England Landscape"
-              var englandCombinedStyles = englandRoadStyle.concat(
-                englandLandscapeStyle
-              );
+                var russiaRoadStyle = [
+                  {
+                    featureType: "road",
+                    elementType: "geometry.fill",
+                    stylers: [
+                      {
+                        color: "#0000ff",
+                        opacity: 0.2,
+                      },
+                    ],
+                  },
+                ];
 
-              // Create a custom map type with the combined style
-              var customMapType = new google.maps.StyledMapType(
-                englandCombinedStyles,
-                {
-                  name: "Custom Map",
-                }
-              );
+                var russiaLandscapeStyle = [
+                  {
+                    featureType: "landscape",
+                    elementType: "geometry.fill",
+                    stylers: [
+                      {
+                        color: "#ffffff",
+                        opacity: 0.2,
+                      },
+                    ],
+                  },
+                ];
 
-              englandMap.mapTypes.set("custom_map", customMapType);
+                var russiaLabelStyle = [
+                  {
+                    featureType: "all",
+                    elementType: "labels.text.fill",
+                    stylers: [
+                      {
+                        color: "#E4181C",
+                        strokeColor: "#E4181C",
+                      },
+                    ],
+                  },
+                ];
 
-              englandMap.setMapTypeId("custom_map");
+                // Merge the styles
+                var russiaCombinedStyles = russiaRoadStyle.concat(
+                  russiaLandscapeStyle,
+                  russiaLabelStyle
+                );
 
-              // Add any markers, polygons, or other map features for England here.
-            }
-            // Call the function to initialize the England map
-            initEnglandMap();
-          </script>
-          <figcaption>England</figcaption>
-        </figure>
+                // Create a custom map type with the combined style
+                var customMapType = new google.maps.StyledMapType(
+                  russiaCombinedStyles,
+                  {
+                    name: "Custom Map",
+                  }
+                );
 
-        <!--  SARDINIA    -->
-        <figure id="sardiniaMap" class="individualThumbnail">
-          <script>
-            let sardiniaMap;
-            function initSardiniaMap() {
-              // Coordinates for Sardinia (Update with actual coordinates)
-              const sardiniaPosition = {
-                lat: 40.13105927700096,
-                lng: 8.987519690734556,
-              };
-              sardiniaMap = new google.maps.Map(
-                document.getElementById("sardiniaMap"),
-                {
-                  zoom: 5,
-                  center: sardiniaPosition,
-                  mapTypeId: google.maps.MapTypeId.SATELLITE,
-                  disableDefaultUI: true,
-                }
-              );
+                russiaMap.mapTypes.set("custom_map", customMapType);
 
-              // Create a blue polygon overlay for the region of interest
-              var sardiniaPolygon = new google.maps.Polygon({
-                paths: [
-                  { lat: 38.834299815855076, lng: 8.860155099457492 },
-                  { lat: 38.95751483520321, lng: 8.351283797009991 },
-                  { lat: 39.229586699903386, lng: 8.18166002952749 },
-                  { lat: 39.91817587196092, lng: 8.373900299340992 },
-                  { lat: 40.59132354950388, lng: 8.045961015541492 },
-                  { lat: 41.14762356782349, lng: 8.326758782028087 },
-                  { lat: 40.868933132183734, lng: 8.490257933776475 },
-                  { lat: 41.25776244998171, lng: 9.15416962976049 },
-                  { lat: 41.16418470079313, lng: 9.60649967638049 },
-                  { lat: 40.505396966317484, lng: 9.86658945318699 },
-                  { lat: 40.05680315688145, lng: 9.776123443862991 },
-                  { lat: 39.10684552286256, lng: 9.549958420552992 },
-                  { lat: 39.168242887211605, lng: 9.15416962976049 },
-                  { lat: 38.92233235935309, lng: 8.961929359946991 },
-                ],
-                strokeColor: "red",
-                strokeOpacity: 0.8,
-                strokeWeight: 1,
-                fillColor: " #89DC1A",
-                fillOpacity: 0.4,
-              });
-              sardiniaPolygon.setMap(sardiniaMap);
-              // Add any markers, polygons, or other map features for Sardinia here.
+                russiaMap.setMapTypeId("custom_map");
+              }
 
-              // Define styles for "Sardinia Road" and "Sardinia Landscape"
-              var sardiniaRoadStyle = [
-                {
-                  featureType: "road",
-                  elementType: "geometry.fill",
-                  stylers: [
-                    {
-                      color: "#000000",
-                      opacity: 0.7,
-                    },
+              initRussiaMap();
+            </script>
+            <figcaption>Russia</figcaption>
+          </figure>
+
+          <!--  BALTIC    -->
+          <figure id="balticMap" class="individualThumbnail">
+            <script>
+              let balticMap;
+              function initBalticMap() {
+                const balticPosition = {
+                  lat: 56.94886874500302,
+                  lng: 24.247627982192903,
+                };
+                balticMap = new google.maps.Map(
+                  document.getElementById("balticMap"),
+                  {
+                    zoom: 3.3,
+                    center: balticPosition,
+                    mapTypeId: google.maps.MapTypeId.SATELLITE,
+                    disableDefaultUI: true,
+                  }
+                );
+                var balticPolygon = new google.maps.Polygon({
+                  paths: [
+                    { lat: 54.68794, lng: 20.43886 },
+                    { lat: 56.58736197852191, lng: 21.06479049118483 },
+                    { lat: 58.67043826494737, lng: 21.988308033517914 },
+                    { lat: 59.592645069068986, lng: 25.220619431683705 },
+                    { lat: 56.405300680871946, lng: 28.2880169830043 },
+                    { lat: 55.668281379807844, lng: 26.68835266860593 },
                   ],
-                },
-              ];
+                  strokeColor: "black",
+                  strokeOpacity: 0.8,
+                  strokeWeight: 1,
+                  fillColor: "orange",
+                  fillOpacity: 0.5,
+                });
 
-              var sardiniaLandscapeStyle = [
-                {
-                  featureType: "landscape",
-                  elementType: "geometry.fill",
-                  stylers: [
-                    {
-                      color: "#909090",
-                      opacity: 0.2,
-                    },
+                balticPolygon.setMap(balticMap);
+              }
+              initBalticMap();
+            </script>
+            <figcaption>Baltic</figcaption>
+          </figure>
+
+          <!--  AUSTRIA    -->
+          <figure id="austriaMap" class="individualThumbnail">
+            <figcaption>Austria</figcaption>
+            <script>
+              function initAustriaMap() {
+                // Coordinates for England (Update with actual coordinates)
+                const austriaPosition = {
+                  lat: 47.789537773056516,
+                  lng: 13.041702653991571,
+                };
+                var austriaMap = new google.maps.Map(
+                  document.getElementById("austriaMap"),
+                  {
+                    zoom: 4.4,
+                    center: austriaPosition,
+                    mapTypeId: google.maps.MapTypeId.SATELLITE,
+                    disableDefaultUI: true,
+                  }
+                );
+
+                // Polygon
+                var austriaPolygon = new google.maps.Polygon({
+                  paths: [
+                    { lat: 47.683510361483926, lng: 12.168195678637915 },
+                    { lat: 47.28698703183143, lng: 11.592858369318948 },
+                    { lat: 47.219746121595485, lng: 12.667329370828542 },
+                    { lat: 47.5396663661055, lng: 14.286656234805767 },
+                    { lat: 48.107581674346385, lng: 14.869613905837564 },
+                    { lat: 48.636568138949066, lng: 14.458114373344532 },
+                    { lat: 47.92627507852276, lng: 12.842689670984344 },
                   ],
-                },
-              ];
+                  strokeColor: "black",
+                  strokeOpacity: 0.8,
+                  strokeWeight: 2,
+                  fillColor: "#DD0000",
+                  fillOpacity: 0.5,
+                });
+                austriaPolygon.setMap(austriaMap);
 
-              var sardiniaLabelStyle = [
-                {
-                  featureType: "all",
-                  elementType: "labels.text.fill",
-                  stylers: [
-                    {
-                      visibility: "on",
-                      color: "#000000",
-                    },
-                  ],
-                },
-              ];
+                var austriaLandscapeStyle = [
+                  {
+                    featureType: "landscape",
+                    elementType: "geometry.fill",
+                    stylers: [
+                      {
+                        color: "#FFCC00",
+                        opacity: "0.5",
+                      },
+                    ],
+                  },
+                ];
 
-              // Merge the styles of "Sardinia Road" and "Sardinia Landscape"
-              var sardiniaCombinedStyles = sardiniaRoadStyle.concat(
-                sardiniaLandscapeStyle,
-                sardiniaLabelStyle
-              );
+                var austriaLabelStyle = [
+                  {
+                    featureType: "all",
+                    elementType: "labels",
+                    stylers: [
+                      {
+                        visibility: "off",
+                      },
+                    ],
+                  },
+                ];
 
-              // Create a custom map type with the combined style
-              var customMapType = new google.maps.StyledMapType(
-                sardiniaCombinedStyles,
-                {
-                  name: "Custom Map",
-                }
-              );
+                var austriaRoadStyle = [
+                  {
+                    featureType: "road",
+                    elementType: "geometry.fill",
+                    stylers: [
+                      {
+                        color: "black",
+                        opacity: 0.5,
+                      },
+                    ],
+                  },
+                ];
 
-              // Set the custom map type to the Sardinia map
-              sardiniaMap.mapTypes.set("custom_map", customMapType);
+                var austriaMergeStyles = austriaLandscapeStyle.concat(
+                  austriaLabelStyle,
+                  austriaRoadStyle
+                );
 
-              sardiniaMap.setMapTypeId("custom_map");
-            }
+                var austriaFinalMap = new google.maps.StyledMapType(
+                  austriaMergeStyles,
+                  {
+                    name: "Austria Map",
+                  }
+                );
+                austriaMap.mapTypes.set("custom_map", austriaFinalMap);
 
-            // Call the function to initialize the Sardinia map
-            initSardiniaMap();
-          </script>
-        </figure>
+                austriaMap.setMapTypeId("custom_map");
+              }
+              // Call the function to initialize the England map
+              initAustriaMap();
+            </script>
+          </figure>
 
-        <!-- RUSSIA    -->
-        <figure id="russiaMap" class="individualThumbnail">
-          <script>
-            let russiaMap;
-            function initRussiaMap() {
-              const russiaPosition = {
-                lat: 46.48839345150547, lng: 50.49899390163209
-              };
-              russiaMap = new google.maps.Map(
-                document.getElementById("russiaMap"),
-                {
-                  zoom: 2,
-                  center: russiaPosition,
-                  mapTypeId: google.maps.MapTypeId.SATELLITE,
-                  disableDefaultUI: true,
-                }
-              );
+          <!--  GREECE    -->
+          <figure id="greeceMap" class="individualThumbnail">
+            <script>
+              function initGreeceMap() {
+                // Coordinates for Greece (Update with actual coordinates)
+                const greecePosition = {
+                  lat: 38.45298675904039,
+                  lng: 23.163102742583845,
+                };
+                var greeceMap = new google.maps.Map(
+                  document.getElementById("greeceMap"),
+                  {
+                    zoom: 5,
+                    center: greecePosition,
+                    mapTypeId: google.maps.MapTypeId.SATELLITE,
+                    disableDefaultUI: true,
+                  }
+                );
 
-              // Create a blue polygon overlay for the region of interest
-              var russiaPolygon = new google.maps.Polygon({
-                paths: [
-                  { lat: 46.39247198376133, lng:32.56733379025783 },
-                  { lat: 45.52746362476204, lng:37.54479574902378},
-                  { lat: 52.383650636057226, lng: 55.829212625161816 },
-                  { lat: 54.330301458666284, lng: 76.78099294258436 },
-                  { lat: 52.028226769650495, lng: 94.68787802935438 },
-                  { lat: 63.18453428339078, lng: 106.14248456967537 },
-                  { lat: 75.74681989080455, lng: 114.62469381054953 },
-                  { lat: 76.91126570009683, lng: 113.75472369356311 },
-                  { lat: 77.83021939257156, lng: 104.47504244145088 },
-                  { lat: 73.6248190304172, lng: 70.90869412504098 },
-                  { lat: 69.89341545244764, lng: 60.10656517245978 },
-                  { lat: 68.76773453271507, lng: 44.73709310569997 },
-                  { lat: 69.27557773333619, lng: 34.1825391263166 },
-                  { lat: 59.97914830132598, lng: 30.165093646177688 },
-                ],
-                strokeColor: "#E4181C",
-                strokeOpacity: 0.8,
-                strokeWeight: 2,
-                fillColor: "#1C3578",
-                fillOpacity: 0.8,
-              });
-              russiaPolygon.setMap(russiaMap);
+                var greeceLandscapeStyle = [
+                  {
+                    featureType: "landscape",
+                    elementType: "geometry.fill",
+                    stylers: [
+                      {
+                        color: "#0d5eaf", // Set the color to black
+                        opacity: 0.2,
+                      },
+                    ],
+                  },
+                ];
 
-              var russiaRoadStyle = [
-                {
-                  featureType: "road",
-                  elementType: "geometry.fill",
-                  stylers: [
-                    {
-                      color: "#0000ff",
-                      opacity: 0.2,
-                    },
-                  ],
-                },
-              ];
+                var greeceRoadStyle = [
+                  {
+                    featureType: "road",
+                    elementType: "geometry.fill",
+                    stylers: [
+                      {
+                        color: "#ffffff",
+                        opacity: 0.9,
+                      },
+                    ],
+                  },
+                ];
 
-              var russiaLandscapeStyle = [
-                {
-                  featureType: "landscape",
-                  elementType: "geometry.fill",
-                  stylers: [
-                    {
-                      color: "#ffffff",
-                      opacity: 0.2,
-                    },
-                  ],
-                },
-              ];
+                var greeceLabelStyle = [
+                  {
+                    featureType: "all",
+                    elementType: "labels",
+                    stylers: [
+                      {
+                        visibility: "off",
+                      },
+                    ],
+                  },
+                  {
+                    featureType: "all",
+                    elementType: "labels.text.fill",
+                    stylers: [
+                      {
+                        color: "#0d5eaf", // White
+                        strokeColor: "#ffffff",
+                        visibility: "off", // Border = blue
+                      },
+                    ],
+                  },
+                ];
 
-              var russiaLabelStyle = [
-                {
-                  featureType: "all",
-                  elementType: "labels.text.fill",
-                  stylers: [
-                    {
-                      color: "#E4181C",
-                      strokeColor: "#E4181C",
-                    },
-                  ],
-                },
-              ];
+                // Create a custom map type with the combined style
+                var customMapType = new google.maps.StyledMapType(
+                  greeceLandscapeStyle.concat(
+                    greeceLabelStyle,
+                    greeceRoadStyle
+                  ),
+                  {
+                    name: "Custom Map",
+                  }
+                );
 
-              // Merge the styles
-              var russiaCombinedStyles = russiaRoadStyle.concat(
-                russiaLandscapeStyle,
-                russiaLabelStyle
-              );
+                // Set the custom map type to the Greece map
+                greeceMap.mapTypes.set("custom_map", customMapType);
 
-              // Create a custom map type with the combined style
-              var customMapType = new google.maps.StyledMapType(
-                russiaCombinedStyles,
-                {
-                  name: "Custom Map",
-                }
-              );
+                greeceMap.setMapTypeId("custom_map");
+              }
+              // Call the function to initialize the Greece map
+              initGreeceMap();
+            </script>
 
-              russiaMap.mapTypes.set("custom_map", customMapType);
-
-              russiaMap.setMapTypeId("custom_map");
-            }
-
-            initRussiaMap();
-          </script>
-          <figcaption>Russia</figcaption>
-        </figure>
-
-        <!--  BALTIC    -->
-        <figure id="balticMap" class="individualThumbnail">
-          <script>
-            let balticMap;
-            function initBalticMap() {
-              const balticPosition = {
-                lat: 56.94886874500302,
-                lng: 24.247627982192903,
-              };
-              balticMap = new google.maps.Map(
-                document.getElementById("balticMap"),
-                {
-                  zoom: 3.3,
-                  center: balticPosition,
-                  mapTypeId: google.maps.MapTypeId.SATELLITE,
-                  disableDefaultUI: true,
-                }
-              );
-              var balticPolygon = new google.maps.Polygon({
-                paths: [
-                  { lat: 54.68794, lng: 20.43886 },
-                  { lat: 56.58736197852191, lng: 21.06479049118483 },
-                  { lat: 58.67043826494737, lng: 21.988308033517914 },
-                  { lat: 59.592645069068986, lng: 25.220619431683705 },
-                  { lat: 56.405300680871946, lng: 28.2880169830043 },
-                  { lat: 55.668281379807844, lng: 26.68835266860593 },
-                ],
-                strokeColor: "black",
-                strokeOpacity: 0.8,
-                strokeWeight: 1,
-                fillColor: "orange",
-                fillOpacity: 0.5,
-              });
-
-              balticPolygon.setMap(balticMap);
-            }
-            initBalticMap();
-          </script>
-          <figcaption>Baltic</figcaption>
-        </figure>
-
-        <!--  AUSTRIA    -->
-        <figure id="austriaMap" class="individualThumbnail">
-          <figcaption>Austria</figcaption>
-          <script>
-            function initAustriaMap() {
-              // Coordinates for England (Update with actual coordinates)
-              const austriaPosition = {
-                lat: 47.789537773056516,
-                lng: 13.041702653991571,
-              };
-              var austriaMap = new google.maps.Map(
-                document.getElementById("austriaMap"),
-                {
-                  zoom: 4.4,
-                  center: austriaPosition,
-                  mapTypeId: google.maps.MapTypeId.SATELLITE,
-                  disableDefaultUI: true,
-                }
-              );
-
-              // Polygon
-              var austriaPolygon = new google.maps.Polygon({
-                paths: [
-                  { lat: 47.683510361483926, lng: 12.168195678637915 },
-                  { lat: 47.28698703183143, lng: 11.592858369318948 },
-                  { lat: 47.219746121595485, lng: 12.667329370828542 },
-                  { lat: 47.5396663661055, lng: 14.286656234805767 },
-                  { lat: 48.107581674346385, lng: 14.869613905837564 },
-                  { lat: 48.636568138949066, lng: 14.458114373344532 },
-                  { lat: 47.92627507852276, lng: 12.842689670984344 },
-                ],
-                strokeColor: "black",
-                strokeOpacity: 0.8,
-                strokeWeight: 2,
-                fillColor: "#DD0000",
-                fillOpacity: 0.5,
-              });
-              austriaPolygon.setMap(austriaMap);
-
-              var austriaLandscapeStyle = [
-                {
-                  featureType: "landscape",
-                  elementType: "geometry.fill",
-                  stylers: [
-                    {
-                      color: "#FFCC00",
-                      opacity: "0.5",
-                    },
-                  ],
-                },
-              ];
-
-              var austriaLabelStyle = [
-                {
-                  featureType: "all",
-                  elementType: "labels",
-                  stylers: [
-                    {
-                      visibility: "off",
-                    },
-                  ],
-                },
-              ];
-
-              var austriaRoadStyle = [
-                {
-                  featureType: "road",
-                  elementType: "geometry.fill",
-                  stylers: [
-                    {
-                      color: "black",
-                      opacity: 0.5,
-                    },
-                  ],
-                },
-              ];
-
-              var austriaMergeStyles =
-                austriaLandscapeStyle.concat(austriaLabelStyle, austriaRoadStyle);
-
-              var austriaFinalMap = new google.maps.StyledMapType(
-                austriaMergeStyles,
-                {
-                  name: "Austria Map",
-                }
-              );
-              austriaMap.mapTypes.set("custom_map", austriaFinalMap);
-
-              austriaMap.setMapTypeId("custom_map");
-            }
-            // Call the function to initialize the England map
-            initAustriaMap();
-          </script>
-        </figure>
-
-        <!--  GREECE    -->
-        <figure id="greeceMap" class="individualThumbnail">
-          <script>
-            function initGreeceMap() {
-              // Coordinates for Greece (Update with actual coordinates)
-              const greecePosition = {
-                lat: 38.45298675904039,
-                lng: 23.163102742583845,
-              };
-              var greeceMap = new google.maps.Map(
-                document.getElementById("greeceMap"),
-                {
-                  zoom: 5,
-                  center: greecePosition,
-                  mapTypeId: google.maps.MapTypeId.SATELLITE,
-                  disableDefaultUI: true,
-                }
-              );
-
-              var greeceLandscapeStyle = [
-                {
-                  featureType: "landscape",
-                  elementType: "geometry.fill",
-                  stylers: [
-                    {
-                      color: "#0d5eaf", // Set the color to black
-                      opacity: 0.2,
-                    },
-                  ],
-                },
-              ];
-
-              var greeceRoadStyle = [
-                {
-                  featureType: "road",
-                  elementType: "geometry.fill",
-                  stylers: [
-                    {
-                      color: "#ffffff",
-                      opacity: 0.9,
-                    },
-                  ],
-                },
-              ];
-
-              var greeceLabelStyle = [
-                {
-                  featureType: "all",
-                  elementType: "labels",
-                  stylers: [
-                    {
-                      visibility: "off",
-                    },
-                  ],
-                },
-                {
-                  featureType: "all",
-                  elementType: "labels.text.fill",
-                  stylers: [
-                    {
-                      color: "#0d5eaf", // White
-                      strokeColor: "#ffffff",
-                      visibility: "off", // Border = blue
-                    },
-                  ],
-                },
-              ];
-
-              // Create a custom map type with the combined style
-              var customMapType = new google.maps.StyledMapType(
-                greeceLandscapeStyle.concat(greeceLabelStyle, greeceRoadStyle),
-                {
-                  name: "Custom Map",
-                }
-              );
-
-              // Set the custom map type to the Greece map
-              greeceMap.mapTypes.set("custom_map", customMapType);
-
-              greeceMap.setMapTypeId("custom_map");
-            }
-            // Call the function to initialize the Greece map
-            initGreeceMap();
-          </script>
-
-          <figcaption>Greece</figcaption>
-        </figure>
+            <figcaption>Greece</figcaption>
+          </figure>
+        </div>
       </div>
     </main>
   </body>
