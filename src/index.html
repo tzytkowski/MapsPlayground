@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Maps Playground</title>
     <link rel="stylesheet" href="css/default.css" type="text/css" />
-    <script src="https://maps.googleapis.com/maps/api/js?key=********************************&libraries=places"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=**********************************&libraries=places"></script>
   </head>
   <body>
     <main>
@@ -57,6 +57,11 @@
                 lng: 23.416513553683984,
               };
 
+              const jaworskiPosition = {
+                lat: 50.770511006234656, 
+                lng: 23.338329312666872
+              };
+
               const kowalskiMarker = new google.maps.Marker({
                 map: mainMap,
                 position: kowalskiPosition,
@@ -71,11 +76,18 @@
                 icon: svgMarker,
               });
 
+              const jaworskiMarker = new google.maps.Marker({
+                map: mainMap,
+                position: jaworskiPosition,
+  
+                icon: svgMarker,
+              })
+
               const zytkowskiFamilyContent =
                 '<div id="content">' +
                 '<div id="siteNotice">' +
                 "</div>" +
-                '<h1 id="firstHeading" class="firstHeading">Zytkowski Family</h1>' +
+                '<h1 id="firstHeading" class="firstHeading" style="text-align: center">Zytkowski Family</h1>' +
                 '<div id="bodyContent">' +
                 "<p><b>Zrab-Kolonia</b>, also referred to as <b>Zrab</b>, is a village " +
                 "in the administrative district of " +
@@ -88,15 +100,26 @@
                 '<div id="content">' +
                 '<div id="siteNotice">' +
                 "</div>" +
-                '<h1 id="firstHeading" class="firstHeading">Kowalski Family</h1>' +
+                '<h1 id="firstHeading" class="firstHeading" style="text-align: center">Kowalski Family</h1>' +
                 '<div id="bodyContent">' +
                 "<p><b>Lipina Nowa</b>, also referred to as <b>Nowa Lipina</b>, is a village " +
                 "is a village in the administrative district of Gmina Skierbieszów, within Zamość County, Lublin Voivodeship, in eastern Poland. " +
                 "The village has a population of 220. </p>";
 
+
+              const jaworskiFamilyContent = 
+              '<div id="content">' +
+                '<div id="siteNotice">' +
+                "</div>" +
+                '<h1 id="firstHeading" class="firstHeading" style="text-align: center">Jaworski Family</h1>' +
+                '<div id="bodyContent">' +
+                "<p><b>Kornelowka</b>, is a village " +
+                "is a village in the administrative district of Gmina Sitno, within Zamość County, Lublin Voivodeship, in eastern Poland." +
+                "It lies approximately 4 kilometres (2 mi) north-west of Sitno, 8 km (5 mi) north-east of Zamość, and 76 km (47 mi) south-east of the regional capital Lublin. </p>";
+
               const zytkowskiInfoBox = new google.maps.InfoWindow({
                 content: zytkowskiFamilyContent,
-                maxWidth: 300,
+                maxWidth: 400,
               });
               zytkowskiMarker.addListener("click", () => {
                 zytkowskiInfoBox.open({
@@ -115,6 +138,19 @@
                   mainMap,
                 });
               });
+
+              const jaworskiInfoBox = new google.maps.InfoWindow({
+                content: jaworskiFamilyContent,
+                maxWidth: 300,
+              });
+              jaworskiMarker.addListener("click", () => {
+                jaworskiInfoBox.open({
+                  anchor: jaworskiMarker,
+                  mainMap,
+                });
+              });
+
+              
 
               // Initialize the geocoder
               geocoder = new google.maps.Geocoder();
@@ -664,6 +700,24 @@
           </figure>
         </div>
       </div>
+      <div class="photo-grid">
+        <div class="photo"><img src="images/1.jpg" alt="Photo 1"></div>
+        <div class="photo"><img src="images/2.jpg" alt="Photo 2"></div>
+        <div class="photo"><img src="images/3.jpg" alt="Photo 3"></div>
+        <div class="photo"><img src="images/4.jpg" alt="Photo 4"></div>
+        <div class="photo"><img src="images/5.jpg" alt="Photo 5"></div>
+        <div class="photo"><img src="images/6.jpg" alt="Photo 6"></div>
+        <div class="photo"><img src="images/7.jpg" alt="Photo 7"></div>
+        <div class="photo"><img src="images/8.jpg" alt="Photo 8"></div>
+        <div class="photo"><img src="images/9.jpg" alt="Photo 9"></div>
+        <div class="photo"><img src="images/10.jpg" alt="Photo 10"></div>
+        <div class="photo"><img src="images/1.jpg" alt="Photo 11"></div>
+        <div class="photo"><img src="placeholder12.jpg" alt="Photo 12"></div>
+        <div class="photo"><img src="placeholder13.jpg" alt="Photo 13"></div>
+        <div class="photo"><img src="placeholder14.jpg" alt="Photo 14"></div>
+        <div class="photo"><img src="placeholder15.jpg" alt="Photo 15"></div>
+        <div class="photo"><img src="placeholder16.jpg" alt="Photo 16"></div>
+    </div>
     </main>
   </body>
 </html>
