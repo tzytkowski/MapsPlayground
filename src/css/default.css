@@ -9,7 +9,7 @@ body {
 
 #secondSection {
     height: 100vh;    
-    background-color: rgba(38, 38, 38, 0.891);
+    background-color: #2d3142;
     display: grid;
     grid-template-columns: repeat(3, 1fr); /* 5 columns with equal width */
     grid-template-rows: repeat(2, 1fr); /* 5 rows with equal height */
@@ -25,10 +25,10 @@ body {
     margin-left: auto;
     margin-right: auto;
     margin-top: 5%;
-    height: 900px;
-    width: 94vw;
+    height: 80vh;
+    width: 95vw;
     box-shadow: 2px 2px 64px 15px black;
-    border-radius: 1%;
+    border-radius: 2%;
 }
 
 #addressHeader {
@@ -62,22 +62,46 @@ body {
 .individualThumbnail {
     border-radius: 2%;
     box-shadow: 22px 22px 64px 2px black;
-    border: 3px solid black;
+    border: 1px solid black;
+    
 }
 
 .photo-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 10px;
+    
 }
 
 .photo {
-    width: 400px; /* Set the desired width */
-    height: 400px; /* Set the desired height */
+    width: 400px; 
+    height: 400px;
 }
 
 .photo img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    box-shadow: 0 0 22px rgba(151, 136, 136, 0.795);
 }
+
+#photoBoxContainer {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 5%;
+    background-color: rgba(38, 38, 38, 0.826);
+}
+
+div a {
+    display:inline-block;
+    text-align: center;
+    width:30vw;
+    height:30px;
+    background-color: inherit;
+    color: white;
+    padding: 5%;
+    text-decoration: none;
+    font-size: 20px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
