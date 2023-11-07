@@ -2,13 +2,16 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Maps Playground</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <link rel="stylesheet" href="css/default.css" type="text/css" />
     <script src="js/animations.js" defer></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=**********&libraries=places" async></script>
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBrJ554PTXvcs0wARbCs74L7_ou8DuojYE&libraries=places"
+      async
+    ></script>
   </head>
   <body>
     <main>
@@ -25,11 +28,11 @@
             async function initMainMap() {
               // Skierbieszow, Poland
               const mainMapPosition = {
-                lat: 50.83218427095049,
-                lng: 23.363589536779955,
+                lat: 50.84916332661795,
+                lng: 23.36190684899422,
               };
               mainMap = new google.maps.Map(document.getElementById("map"), {
-                zoom: 14,
+                zoom: 14.5,
                 center: mainMapPosition,
                 heading: 0,
                 tilt: 47.5,
@@ -209,6 +212,22 @@
                   },
                 ];
 
+                var englandWater = [
+                  {
+                    featureType: "water",
+                    elementType: "geometry",
+                    stylers: [{ color: "#17263c" }],
+                  },
+                ];
+
+                var englandWaterLabel = [
+                  {
+                    featureType: "water",
+                    elementType: "labels.text.fill",
+                    stylers: [{ color: "#ffffff" }],
+                  },
+                ];
+
                 var englandLandscapeStyle = [
                   {
                     featureType: "landscape",
@@ -224,7 +243,9 @@
 
                 // Merge the styles of "England Road" and "England Landscape"
                 var englandCombinedStyles = englandRoadStyle.concat(
-                  englandLandscapeStyle
+                  englandLandscapeStyle,
+                  englandWater,
+                  englandWaterLabel
                 );
 
                 // Create a custom map type with the combined style
@@ -321,6 +342,22 @@
                   },
                 ];
 
+                var sardiniaWater = [
+                  {
+                    featureType: "water",
+                    elementType: "geometry",
+                    stylers: [{ color: "#17263c" }],
+                  },
+                ];
+
+                var sardiniaWaterLabel = [
+                  {
+                    featureType: "water",
+                    elementType: "labels.text.fill",
+                    stylers: [{ color: "#ffffff" }],
+                  },
+                ];
+
                 var sardiniaLabelStyle = [
                   {
                     featureType: "all",
@@ -337,7 +374,9 @@
                 // Merge the styles of "Sardinia Road" and "Sardinia Landscape"
                 var sardiniaCombinedStyles = sardiniaRoadStyle.concat(
                   sardiniaLandscapeStyle,
-                  sardiniaLabelStyle
+                  sardiniaLabelStyle,
+                  sardiniaWater,
+                  sardiniaWaterLabel
                 );
 
                 // Create a custom map type with the combined style
@@ -442,11 +481,28 @@
                     ],
                   },
                 ];
+                var russiaWater = [
+                  {
+                    featureType: "water",
+                    elementType: "geometry",
+                    stylers: [{ color: "#17263c" }],
+                  },
+                ];
+
+                var russiaWaterLabel = [
+                  {
+                    featureType: "water",
+                    elementType: "labels.text.fill",
+                    stylers: [{ color: "#ffffff" }],
+                  },
+                ];
 
                 // Merge the styles
                 var russiaCombinedStyles = russiaRoadStyle.concat(
                   russiaLandscapeStyle,
-                  russiaLabelStyle
+                  russiaLabelStyle,
+                  russiaWater,
+                  russiaWaterLabel
                 );
 
                 // Create a custom map type with the combined style
@@ -476,7 +532,8 @@
                   lat: 56.94886874500302,
                   lng: 24.247627982192903,
                 };
-                balticMap = new google.maps.Map(
+
+                const balticMap = new google.maps.Map(
                   document.getElementById("balticMap"),
                   {
                     zoom: 3.3,
@@ -485,7 +542,8 @@
                     disableDefaultUI: true,
                   }
                 );
-                var balticPolygon = new google.maps.Polygon({
+
+                const balticPolygon = new google.maps.Polygon({
                   paths: [
                     { lat: 54.68794, lng: 20.43886 },
                     { lat: 56.58736197852191, lng: 21.06479049118483 },
@@ -503,6 +561,31 @@
 
                 balticPolygon.setMap(balticMap);
               }
+
+              const landscapeStyle = [
+                {
+                  featureType: "landscape",
+                  elementType: "geometry.fill",
+                  stylers: [
+                    {
+                      color: "#d1c96d", // Color for landscape
+                      opacity: 0.2,
+                    },
+                  ],
+                },
+              ];
+
+              const waterStyle = [
+                {
+                  featureType: "water",
+                  elementType: "geometry.fill",
+                  stylers: [
+                    {
+                      color: "#3498db", // Color for water
+                    },
+                  ],
+                },
+              ];
               initBalticMap();
             </script>
             <figcaption>Baltic</figcaption>
@@ -585,9 +668,27 @@
                   },
                 ];
 
+                var austriaWater = [
+                  {
+                    featureType: "water",
+                    elementType: "geometry",
+                    stylers: [{ color: "#17263c" }],
+                  },
+                ];
+
+                var austriaWaterLabel = [
+                  {
+                    featureType: "water",
+                    elementType: "labels.text.fill",
+                    stylers: [{ color: "#ffffff" }],
+                  },
+                ];
+
                 var austriaMergeStyles = austriaLandscapeStyle.concat(
                   austriaLabelStyle,
-                  austriaRoadStyle
+                  austriaRoadStyle,
+                  austriaWater,
+                  austriaWaterLabel
                 );
 
                 var austriaFinalMap = new google.maps.StyledMapType(
@@ -673,11 +774,29 @@
                   },
                 ];
 
+                var greeceWater = [
+                  {
+                    featureType: "water",
+                    elementType: "geometry",
+                    stylers: [{ color: "#17263c" }],
+                  },
+                ];
+
+                var greeceWaterLabel = [
+                  {
+                    featureType: "water",
+                    elementType: "labels.text.fill",
+                    stylers: [{ color: "#ffffff" }],
+                  },
+                ];
+
                 // Create a custom map type with the combined style
                 var customMapType = new google.maps.StyledMapType(
                   greeceLandscapeStyle.concat(
                     greeceLabelStyle,
-                    greeceRoadStyle
+                    greeceRoadStyle,
+                    greeceWater,
+                    greeceWaterLabel
                   ),
                   {
                     name: "Custom Map",
@@ -721,7 +840,6 @@
           <div id="jaworskiPhotoBox">
             <div class="photo"><img src="images/6.jpg" alt="Photo 6" /></div>
           </div>
-          
         </div>
       </div>
     </main>
