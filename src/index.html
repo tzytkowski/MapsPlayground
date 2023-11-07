@@ -9,9 +9,10 @@
     <link rel="stylesheet" href="css/default.css" type="text/css" />
     <script src="js/animations.js" defer></script>
     <script
-      src="https://maps.googleapis.com/maps/api/js?key=********&libraries=places"
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBrJ554PTXvcs0wARbCs74L7_ou8DuojYE&libraries=places"
       async
     ></script>
+    <script src="webgl.js" defer></script>
   </head>
   <body>
     <main>
@@ -28,8 +29,10 @@
             async function initMainMap() {
               // Skierbieszow, Poland
               const mainMapPosition = {
-                lat: 50.84916332661795,
-                lng: 23.36190684899422,
+                lat: 50.85271451343184,
+                lng: 23.363101630217436,
+                //lat: 50.84916332661795,
+                //lng: 23.36190684899422,
               };
               mainMap = new google.maps.Map(document.getElementById("map"), {
                 zoom: 14.5,
@@ -38,11 +41,45 @@
                 tilt: 47.5,
                 mapId: "dc8fe6b345586f78",
                 mapTypeId: google.maps.MapTypeId.SATELLITE,
+                disableDefaultUI: true,
               });
 
-              //Adding Marker
+              function createCenterControl(map) {
+                const controlButton = document.createElement("button");
+
+                // Set CSS for the control
+                controlButton.style.bottom = 0;
+                controlButton.style.right = 0;
+                controlButton.style.boxShadow = "0 2px 6px rgba(0,0,0,.3)";
+                controlButton.style.color = "rgb(25,25,25)";
+                controlButton.style.cursor = "pointer";
+                controlButton.style.fontFamily = "Roboto,Arial,sans-serif";
+                controlButton.style.fontSize = "10px";
+                controlButton.style.lineHeight = "38px";
+                controlButton.style.margin = "8px 0 22px";
+                controlButton.style.padding = "0 1px";
+                controlButton.style.textAlign = "center";
+                controlButton.textContent = "Center Map";
+                controlButton.title = "Click to recenter the map";
+                controlButton.type = "button";
+
+                controlButton.addEventListener("click", () => {
+                  map.setCenter(mainMapPosition);
+                });
+                return controlButton;
+              }
+
+              const centerControlDiv = document.createElement("div");
+              const centerControl = createCenterControl(mainMap);
+
+              centerControlDiv.appendChild(centerControl);
+              mainMap.controls[google.maps.ControlPosition.TOP_CENTER].push(
+                centerControlDiv
+              );
+
+              //Star Marker
               const svgMarker = {
-                path: "M-1.547 12l6.563-6.609-1.406-1.406-5.156 5.203-2.063-2.109-1.406 1.406zM0 0q2.906 0 4.945 2.039t2.039 4.945q0 1.453-0.727 3.328t-1.758 3.516-2.039 3.070-1.711 2.273l-0.75 0.797q-0.281-0.328-0.75-0.867t-1.688-2.156-2.133-3.141-1.664-3.445-0.75-3.375q0-2.906 2.039-4.945t4.945-2.039z",
+                path: "M12,2 L14,7 L19,7 L15,10 L17,15 L12,12 L7,15 L9,10 L5,7 L10,7 Z",
                 fillColor: "red",
                 fillOpacity: 0.6,
                 strokeWeight: 0,
@@ -58,8 +95,10 @@
               };
 
               const kowalskiPosition = {
-                lat: 50.842826703783494,
-                lng: 23.416513553683984,
+                lat: 50.844282574494635,
+                lng: 23.4099605992874,
+                //lat: 50.842826703783494,
+                //lng: 23.416513553683984,
               };
 
               const jaworskiPosition = {
@@ -153,6 +192,17 @@
                   mainMap,
                 });
               });
+
+              // DIRECTIONS
+              const directionsService = new google.maps.DirectionsService();
+              const directionsRenderer = new google.maps.DirectionsRenderer({
+                draggable: true,
+                map,
+                panel: document.getElementById("panel"),
+              });
+              
+      
+
               // Initialize the geocoder
               geocoder = new google.maps.Geocoder();
             }

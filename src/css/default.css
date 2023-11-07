@@ -1,13 +1,15 @@
 body {
-    background-color: rgba(122, 105, 48, 0.592);
+    background-color: rgba(65, 62, 50, 0.884);
+    
 }
 
 #firstSection {
     width: auto;
     height: 95vh;
-    background-color: rgba(109, 61, 46, 0.826);
+    background-color: rgba(65, 62, 50, 0.884);
     border-radius: 1%;
     padding-top: 0.5%;
+    box-shadow: 0 0 42px black;
     
 
 }
