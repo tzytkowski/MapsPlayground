@@ -1,19 +1,12 @@
 <!DOCTYPE html>
-<!-- TZ -->
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Maps</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maps Playground</title>
     <link rel="stylesheet" href="css/default.css" type="text/css" />
-    <script src="js/animations.js" defer></script>
-    <script
-      src="https://maps.googleapis.com/maps/api/js?key=*********&libraries=places"
-      async
-    ></script>
-    <script src="webgl.js" defer></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBrJ554PTXvcs0wARbCs74L7_ou8DuojYE&libraries=places"></script>
   </head>
   <body>
     <main>
@@ -23,213 +16,261 @@
           <input type="text" id="address" placeholder="Enter an address" />
           <button onclick="geocodeAddress()">Geocode</button>
         </div>
+        
+        
         <div id="map">
           <script>
-            let mainMap;
-            let geocoder;
-            async function initMainMap() {
-              // Skierbieszow, Poland X
-              const mainMapPosition = {
-                lat: 50.85271451343184,
-                lng: 23.363101630217436,
-                //lat: 50.84916332661795,
-                //lng: 23.36190684899422,
-              };
-              mainMap = new google.maps.Map(document.getElementById("map"), {
-                zoom: 14.5,
-                center: mainMapPosition,
-                heading: 0,
-                tilt: 47.5,
-                mapId: "dc8fe6b345586f78",
-                mapTypeId: google.maps.MapTypeId.SATELLITE,
-                disableDefaultUI: true,
-              });
+                        let mainMap;
+                        let geocoder;
+                        async function initMainMap() {
+                          // Skierbieszow, Poland
+                          const mainMapPosition = {
+                            lat: 50.83218427095049,
+                            lng: 23.363589536779955,
+                          };
+                          mainMap = new google.maps.Map(document.getElementById("map"), {
+                            zoom: 12,
+                            center: mainMapPosition,
+                            heading: 0,
+                            tilt: 47.5,
+                            mapId: "dc8fe6b345586f78",
+                            mapTypeId: google.maps.MapTypeId.SATELLITE,
+                          });
+                  
+                          // Create a polygon overlay
+                          var zamoscPolygon = new google.maps.Polygon({
+                              paths: [
+                              { lat: 50.716275795630104, lng: 23.257917678090188 },
+                              { lat: 50.715915307683396, lng: 23.256823753032066 },
+                              { lat: 50.71604831245535, lng: 23.25652814070447 },
+                              { lat: 50.714954624637286, lng: 23.25461552999678 },
+                              { lat: 50.71475365831935, lng: 23.25469647031523 },
+                              { lat: 50.714355780022906, lng: 23.25411049347247 },
+                              { lat: 50.71497845019168, lng: 23.25332125471589 },
+                              { lat: 50.71596552218985, lng: 23.249241689029407 },
+                              { lat: 50.716873588839945, lng: 23.247492912338274 },
+                              { lat: 50.71808715114563, lng: 23.247815182160245 },
+                              { lat: 50.71850628626931, lng: 23.24920014501654 },
+                              { lat: 50.71814999076724, lng: 23.250886091844436 },
+                              { lat: 50.71935379307268, lng: 23.251548299642987 },
+                              { lat: 50.7206013548425, lng: 23.254496790843902 },
+                              { lat: 50.71952241828074, lng: 23.25562665265256 },
+                              { lat: 50.71947620443298, lng: 23.256249949746465 },
+                              { lat: 50.71851864568982, lng: 23.25643641947088 },
+                              { lat: 50.71687002241735, lng: 23.25695835137462 }
 
-              function createCenterControl(map) {
-                const controlButton = document.createElement("button");
+                              ],
+                              strokeColor: "red",
+                              strokeOpacity: 0.8,
+                              strokeWeight: 1,
+                              fillColor: " #89DC1A",
+                              fillOpacity: 0.4,
+                            });
+                            zamoscPolygon.setMap(zamoscMap);
+                        
+                            var zamoscRoadStyle = [
+                              {
+                                featureType: "road",
+                                elementType: "geometry.fill",
+                                stylers: [
+                                  {
+                                    color: "#000000",
+                                    opacity: 0.7,
+                                  },
+                                ],
+                              },
+                            ];
 
-                // Set CSS for the control
-                controlButton.style.bottom = 0;
-                controlButton.style.right = 0;
-                controlButton.style.boxShadow = "0 2px 6px rgba(0,0,0,.3)";
-                controlButton.style.color = "rgb(25,25,25)";
-                controlButton.style.cursor = "pointer";
-                controlButton.style.fontFamily = "Roboto,Arial,sans-serif";
-                controlButton.style.fontSize = "10px";
-                controlButton.style.lineHeight = "38px";
-                controlButton.style.margin = "8px 0 22px";
-                controlButton.style.padding = "0 1px";
-                controlButton.style.textAlign = "center";
-                controlButton.textContent = "Center Map";
-                controlButton.title = "Click to recenter the map";
-                controlButton.type = "button";
+                            var zamoscLandscapeStyle = [
+                              {
+                                featureType: "landscape",
+                                elementType: "geometry.fill",
+                                stylers: [
+                                  {
+                                    color: "#909090",
+                                    opacity: 0.2,
+                                  },
+                                ],
+                              },
+                            ];
 
-                controlButton.addEventListener("click", () => {
-                  map.setCenter(mainMapPosition);
-                });
-                return controlButton;
-              }
+                            var zamoscLabelStyle = [
+                              {
+                                featureType: "all",
+                                elementType: "labels.text.fill",
+                                stylers: [
+                                  {
+                                    visibility: "on",
+                                    color: "#000000",
+                                  },
+                                ],
+                              },
+                            ];
 
-              const centerControlDiv = document.createElement("div");
-              const centerControl = createCenterControl(mainMap);
+                            var zamoscCombinedStyles = zamoscRoadStyle.concat(
+                              zamoscLandscapeStyle,
+                              zamoscLabelStyle
+                            );
 
-              centerControlDiv.appendChild(centerControl);
-              mainMap.controls[google.maps.ControlPosition.TOP_CENTER].push(
-                centerControlDiv
-              );
+                            // Create a custom map type with the combined style
+                            var customMapType = new google.maps.StyledMapType(
+                              zamoscCombinedStyles,
+                              {
+                                name: "Custom Map",
+                              }
+                            );
 
-              //Star Marker
-              const svgMarker = {
-                path: "M12,2 L14,7 L19,7 L15,10 L17,15 L12,12 L7,15 L9,10 L5,7 L10,7 Z",
-                fillColor: "red",
-                fillOpacity: 0.6,
-                strokeWeight: 0,
-                rotation: 0,
-                scale: 4,
-                anchor: new google.maps.Point(0, 20),
-              };
+                            // Set the custom map type to the Sardinia map
+                            zamoscMap.mapTypes.set("custom_map", customMapType);
+                            zamoscMap.setMapTypeId("custom_map");
+                          };
+                        
+                          //Adding Marker
+                          const svgMarker = {
+                            path: "M-1.547 12l6.563-6.609-1.406-1.406-5.156 5.203-2.063-2.109-1.406 1.406zM0 0q2.906 0 4.945 2.039t2.039 4.945q0 1.453-0.727 3.328t-1.758 3.516-2.039 3.070-1.711 2.273l-0.75 0.797q-0.281-0.328-0.75-0.867t-1.688-2.156-2.133-3.141-1.664-3.445-0.75-3.375q0-2.906 2.039-4.945t4.945-2.039z",
+                            fillColor: "red",
+                            fillOpacity: 0.6,
+                            strokeWeight: 0,
+                            rotation: 0,
+                            scale: 4,
+                            anchor: new google.maps.Point(0, 20),
+                          };
 
-              // Adding a marker to the map
-              const zytkowskiPosition = {
-                lat: 50.80547829014646,
-                lng: 23.317655335342476,
-              };
+                          // Adding a marker to the map
+                          const zytkowskiPosition = {
+                            lat: 50.80547829014646,
+                            lng: 23.317655335342476,
+                          };
 
-              const kowalskiPosition = {
-                lat: 50.844282574494635,
-                lng: 23.4099605992874,
-                //lat: 50.842826703783494,
-                //lng: 23.416513553683984,
-              };
+                          const kowalskiPosition = {
+                            lat: 50.842826703783494,
+                            lng: 23.416513553683984,
+                          };
 
-              const jaworskiPosition = {
-                lat: 50.770511006234656,
-                lng: 23.338329312666872,
-              };
+                          const jaworskiPosition = {
+                            lat: 50.770511006234656,
+                            lng: 23.338329312666872
+                          };
 
-              const kowalskiMarker = new google.maps.Marker({
-                map: mainMap,
-                position: kowalskiPosition,
-                label: "K",
-                icon: svgMarker,
-              });
+                          const kowalskiMarker = new google.maps.Marker({
+                            map: mainMap,
+                            position: kowalskiPosition,
+                            label: "K",
+                            icon: svgMarker,
+                          });
 
-              const zytkowskiMarker = new google.maps.Marker({
-                map: mainMap,
-                position: zytkowskiPosition,
-                label: "Z",
-                icon: svgMarker,
-              });
+                          const zytkowskiMarker = new google.maps.Marker({
+                            map: mainMap,
+                            position: zytkowskiPosition,
+                            label: "Z",
+                            icon: svgMarker,
+                          });
 
-              const jaworskiMarker = new google.maps.Marker({
-                map: mainMap,
-                position: jaworskiPosition,
+                          const jaworskiMarker = new google.maps.Marker({
+                            map: mainMap,
+                            position: jaworskiPosition,
 
-                icon: svgMarker,
-              });
+                            icon: svgMarker,
+                          })
 
-              const zytkowskiFamilyContent =
-                '<div id="content">' +
-                '<div id="siteNotice">' +
-                "</div>" +
-                '<h1 id="firstHeading" class="firstHeading" style="text-align: center">Zytkowski Family</h1>' +
-                '<div id="bodyContent">' +
-                "<p><b>Zrab-Kolonia</b>, also referred to as <b>Zrab</b>, is a village " +
-                "in the administrative district of " +
-                "Gmina Skierbieszów, within Zamość County, Lublin Voivodeship, in eastern Poland. " +
-                "It lies approximately 7 kilometres (4 mi) south-west of Skierbieszów, " +
-                "11 km (7 mi) north-east of Zamość, and 72 km (45 mi) south-east of the regional capital Lublin. " +
-                "The village has a population of 260. </p>";
+                          const zytkowskiFamilyContent =
+                            '<div id="content">' +
+                            '<div id="siteNotice">' +
+                            "</div>" +
+                            '<h1 id="firstHeading" class="firstHeading" style="text-align: center">Zytkowski Family</h1>' +
+                            '<div id="bodyContent">' +
+                            "<p><b>Zrab-Kolonia</b>, also referred to as <b>Zrab</b>, is a village " +
+                            "in the administrative district of " +
+                            "Gmina Skierbieszów, within Zamość County, Lublin Voivodeship, in eastern Poland. " +
+                            "It lies approximately 7 kilometres (4 mi) south-west of Skierbieszów, " +
+                            "11 km (7 mi) north-east of Zamość, and 72 km (45 mi) south-east of the regional capital Lublin. " +
+                            "The village has a population of 260. </p>";
 
-              const kowalskiFamilyContent =
-                '<div id="content">' +
-                '<div id="siteNotice">' +
-                "</div>" +
-                '<h1 id="firstHeading" class="firstHeading" style="text-align: center">Kowalski Family</h1>' +
-                '<div id="bodyContent">' +
-                "<p><b>Lipina Nowa</b>, also referred to as <b>Nowa Lipina</b>, is a village " +
-                "is a village in the administrative district of Gmina Skierbieszów, within Zamość County, Lublin Voivodeship, in eastern Poland. " +
-                "The village has a population of 220. </p>";
+                          const kowalskiFamilyContent =
+                            '<div id="content">' +
+                            '<div id="siteNotice">' +
+                            "</div>" +
+                            '<h1 id="firstHeading" class="firstHeading" style="text-align: center">Kowalski Family</h1>' +
+                            '<div id="bodyContent">' +
+                            "<p><b>Lipina Nowa</b>, also referred to as <b>Nowa Lipina</b>, is a village " +
+                            "is a village in the administrative district of Gmina Skierbieszów, within Zamość County, Lublin Voivodeship, in eastern Poland. " +
+                            "The village has a population of 220. </p>";
 
-              const jaworskiFamilyContent =
-                '<div id="content">' +
-                '<div id="siteNotice">' +
-                "</div>" +
-                '<h1 id="firstHeading" class="firstHeading" style="text-align: center">Jaworski Family</h1>' +
-                '<div id="bodyContent">' +
-                "<p><b>Kornelowka</b>, is a village " +
-                "is a village in the administrative district of Gmina Sitno, within Zamość County, Lublin Voivodeship, in eastern Poland." +
-                "It lies approximately 4 kilometres (2 mi) north-west of Sitno, 8 km (5 mi) north-east of Zamość, and 76 km (47 mi) south-east of the regional capital Lublin. </p>";
 
-              const zytkowskiInfoBox = new google.maps.InfoWindow({
-                content: zytkowskiFamilyContent,
-                maxWidth: 400,
-              });
-              zytkowskiMarker.addListener("click", () => {
-                zytkowskiInfoBox.open({
-                  anchor: zytkowskiMarker,
-                  mainMap,
-                });
-              });
+                          const jaworskiFamilyContent =
+                          '<div id="content">' +
+                            '<div id="siteNotice">' +
+                            "</div>" +
+                            '<h1 id="firstHeading" class="firstHeading" style="text-align: center">Jaworski Family</h1>' +
+                            '<div id="bodyContent">' +
+                            "<p><b>Kornelowka</b>, is a village " +
+                            "is a village in the administrative district of Gmina Sitno, within Zamość County, Lublin Voivodeship, in eastern Poland." +
+                            "It lies approximately 4 kilometres (2 mi) north-west of Sitno, 8 km (5 mi) north-east of Zamość, and 76 km (47 mi) south-east of the regional capital Lublin. </p>";
 
-              const kowalskiInfoBox = new google.maps.InfoWindow({
-                content: kowalskiFamilyContent,
-                maxWidth: 300,
-              });
-              kowalskiMarker.addListener("click", () => {
-                kowalskiInfoBox.open({
-                  anchor: kowalskiMarker,
-                  mainMap,
-                });
-              });
+                          const zytkowskiInfoBox = new google.maps.InfoWindow({
+                            content: zytkowskiFamilyContent,
+                            maxWidth: 400,
+                          });
+                          zytkowskiMarker.addListener("click", () => {
+                            zytkowskiInfoBox.open({
+                              anchor: zytkowskiMarker,
+                              mainMap,
+                            });
+                          });
 
-              const jaworskiInfoBox = new google.maps.InfoWindow({
-                content: jaworskiFamilyContent,
-                maxWidth: 300,
-              });
-              jaworskiMarker.addListener("click", () => {
-                jaworskiInfoBox.open({
-                  anchor: jaworskiMarker,
-                  mainMap,
-                });
-              });
+                          const kowalskiInfoBox = new google.maps.InfoWindow({
+                            content: kowalskiFamilyContent,
+                            maxWidth: 300,
+                          });
+                          kowalskiMarker.addListener("click", () => {
+                            kowalskiInfoBox.open({
+                              anchor: kowalskiMarker,
+                              mainMap,
+                            });
+                          });
 
-              // DIRECTIONS
-              const directionsService = new google.maps.DirectionsService();
-              const directionsRenderer = new google.maps.DirectionsRenderer({
-                draggable: true,
-                map,
-                panel: document.getElementById("panel"),
-              });
-              
-      
+                          const jaworskiInfoBox = new google.maps.InfoWindow({
+                            content: jaworskiFamilyContent,
+                            maxWidth: 300,
+                          });
+                          jaworskiMarker.addListener("click", () => {
+                            jaworskiInfoBox.open({
+                              anchor: jaworskiMarker,
+                              mainMap,
+                            });
+                          });
 
-              // Initialize the geocoder
-              geocoder = new google.maps.Geocoder();
-            }
-            // Function to geocode an address and add a marker
-            function geocodeAddress() {
-              const address = document.getElementById("address").value;
-              geocoder.geocode({ address: address }, (results, status) => {
-                if (status === "OK") {
-                  mainMap.setCenter(results[0].geometry.location);
-                  new google.maps.Marker({
-                    map: mainMap,
-                    position: results[0].geometry.location,
-                  });
-                } else {
-                  alert("Geocode was not successful because: " + status);
-                }
-              });
-            }
-            // Call the function to initialize the main map
-            initMainMap();
+
+
+                          // Initialize the geocoder
+                          geocoder = new google.maps.Geocoder();
+                        
+                        // Function to geocode an address and add a marker
+                        function geocodeAddress() {
+                          const address = document.getElementById("address").value;
+                          geocoder.geocode({ address: address }, (results, status) => {
+                            if (status === "OK") {
+                              mainMap.setCenter(results[0].geometry.location);
+                              new google.maps.Marker({
+                                map: mainMap,
+                                position: results[0].geometry.location,
+                              });
+                            } else {
+                              alert("Geocode was not successful because: " + status);
+                            }
+                          });
+                        }
+                        // Call the function to initialize the main map
+                        initMainMap();
           </script>
         </div>
       </div>
+
+      <button id="mapsOpener" onclick="toggleGrid()">Toggle Grid</button>
       <div>
         <div id="secondSection">
           <!--  ENGLAND    -->
+
           <figure id="englandMap" class="individualThumbnail">
             <script>
               function initEnglandMap() {
@@ -243,7 +284,7 @@
                   document.getElementById("englandMap"),
                   {
                     zoom: 6,
-                    center: englandPosition, // Assuming you have defined englandPosition
+                    center: englandPosition,
                     mapTypeId: google.maps.MapTypeId.SATELLITE,
                     disableDefaultUI: true,
                   }
@@ -263,22 +304,6 @@
                   },
                 ];
 
-                var englandWater = [
-                  {
-                    featureType: "water",
-                    elementType: "geometry",
-                    stylers: [{ color: "#17263c" }],
-                  },
-                ];
-
-                var englandWaterLabel = [
-                  {
-                    featureType: "water",
-                    elementType: "labels.text.fill",
-                    stylers: [{ color: "#ffffff" }],
-                  },
-                ];
-
                 var englandLandscapeStyle = [
                   {
                     featureType: "landscape",
@@ -294,9 +319,7 @@
 
                 // Merge the styles of "England Road" and "England Landscape"
                 var englandCombinedStyles = englandRoadStyle.concat(
-                  englandLandscapeStyle,
-                  englandWater,
-                  englandWaterLabel
+                  englandLandscapeStyle
                 );
 
                 // Create a custom map type with the combined style
@@ -393,22 +416,6 @@
                   },
                 ];
 
-                var sardiniaWater = [
-                  {
-                    featureType: "water",
-                    elementType: "geometry",
-                    stylers: [{ color: "#17263c" }],
-                  },
-                ];
-
-                var sardiniaWaterLabel = [
-                  {
-                    featureType: "water",
-                    elementType: "labels.text.fill",
-                    stylers: [{ color: "#ffffff" }],
-                  },
-                ];
-
                 var sardiniaLabelStyle = [
                   {
                     featureType: "all",
@@ -425,9 +432,7 @@
                 // Merge the styles of "Sardinia Road" and "Sardinia Landscape"
                 var sardiniaCombinedStyles = sardiniaRoadStyle.concat(
                   sardiniaLandscapeStyle,
-                  sardiniaLabelStyle,
-                  sardiniaWater,
-                  sardiniaWaterLabel
+                  sardiniaLabelStyle
                 );
 
                 // Create a custom map type with the combined style
@@ -532,28 +537,11 @@
                     ],
                   },
                 ];
-                var russiaWater = [
-                  {
-                    featureType: "water",
-                    elementType: "geometry",
-                    stylers: [{ color: "#17263c" }],
-                  },
-                ];
-
-                var russiaWaterLabel = [
-                  {
-                    featureType: "water",
-                    elementType: "labels.text.fill",
-                    stylers: [{ color: "#ffffff" }],
-                  },
-                ];
 
                 // Merge the styles
                 var russiaCombinedStyles = russiaRoadStyle.concat(
                   russiaLandscapeStyle,
-                  russiaLabelStyle,
-                  russiaWater,
-                  russiaWaterLabel
+                  russiaLabelStyle
                 );
 
                 // Create a custom map type with the combined style
@@ -583,8 +571,7 @@
                   lat: 56.94886874500302,
                   lng: 24.247627982192903,
                 };
-
-                const balticMap = new google.maps.Map(
+                balticMap = new google.maps.Map(
                   document.getElementById("balticMap"),
                   {
                     zoom: 3.3,
@@ -593,8 +580,7 @@
                     disableDefaultUI: true,
                   }
                 );
-
-                const balticPolygon = new google.maps.Polygon({
+                var balticPolygon = new google.maps.Polygon({
                   paths: [
                     { lat: 54.68794, lng: 20.43886 },
                     { lat: 56.58736197852191, lng: 21.06479049118483 },
@@ -612,31 +598,6 @@
 
                 balticPolygon.setMap(balticMap);
               }
-
-              const landscapeStyle = [
-                {
-                  featureType: "landscape",
-                  elementType: "geometry.fill",
-                  stylers: [
-                    {
-                      color: "#d1c96d", // Color for landscape
-                      opacity: 0.2,
-                    },
-                  ],
-                },
-              ];
-
-              const waterStyle = [
-                {
-                  featureType: "water",
-                  elementType: "geometry.fill",
-                  stylers: [
-                    {
-                      color: "#3498db", // Color for water
-                    },
-                  ],
-                },
-              ];
               initBalticMap();
             </script>
             <figcaption>Baltic</figcaption>
@@ -719,27 +680,9 @@
                   },
                 ];
 
-                var austriaWater = [
-                  {
-                    featureType: "water",
-                    elementType: "geometry",
-                    stylers: [{ color: "#17263c" }],
-                  },
-                ];
-
-                var austriaWaterLabel = [
-                  {
-                    featureType: "water",
-                    elementType: "labels.text.fill",
-                    stylers: [{ color: "#ffffff" }],
-                  },
-                ];
-
                 var austriaMergeStyles = austriaLandscapeStyle.concat(
                   austriaLabelStyle,
-                  austriaRoadStyle,
-                  austriaWater,
-                  austriaWaterLabel
+                  austriaRoadStyle
                 );
 
                 var austriaFinalMap = new google.maps.StyledMapType(
@@ -782,7 +725,7 @@
                     elementType: "geometry.fill",
                     stylers: [
                       {
-                        color: "#0d5eaf", // Set the color to black
+                        color: "#0d5eaf", 
                         opacity: 0.2,
                       },
                     ],
@@ -817,80 +760,31 @@
                     elementType: "labels.text.fill",
                     stylers: [
                       {
-                        color: "#0d5eaf", // White
+                        color: "#0d5eaf", 
                         strokeColor: "#ffffff",
-                        visibility: "off", // Border = blue
+                        visibility: "off",
                       },
                     ],
                   },
                 ];
 
-                var greeceWater = [
-                  {
-                    featureType: "water",
-                    elementType: "geometry",
-                    stylers: [{ color: "#17263c" }],
-                  },
-                ];
-
-                var greeceWaterLabel = [
-                  {
-                    featureType: "water",
-                    elementType: "labels.text.fill",
-                    stylers: [{ color: "#ffffff" }],
-                  },
-                ];
-
-                // Create a custom map type with the combined style
+                // Custom map type with combined styles
                 var customMapType = new google.maps.StyledMapType(
                   greeceLandscapeStyle.concat(
                     greeceLabelStyle,
-                    greeceRoadStyle,
-                    greeceWater,
-                    greeceWaterLabel
+                    greeceRoadStyle
                   ),
                   {
                     name: "Custom Map",
                   }
                 );
-
-                // Set the custom map type to the Greece map
                 greeceMap.mapTypes.set("custom_map", customMapType);
-
                 greeceMap.setMapTypeId("custom_map");
               }
-              // Call the function to initialize the Greece map
               initGreeceMap();
             </script>
 
-            <figcaption>Greece</figcaption>
           </figure>
-        </div>
-      </div>
-      <div id="photoBoxContainer">
-        <div id="zytkowskiPhotoBoxContainer">
-          <a id="zytkowskiPhotoBoxLink" href="">Zytkowski</a>
-          <div id="zytkowskiPhotoBox">
-            <div class="photo"><img src="images/1.jpg" alt="Photo 1" /></div>
-            <div class="photo"><img src="images/2.jpg" alt="Photo 2" /></div>
-            <div class="photo"><img src="images/3.jpg" alt="Photo 3" /></div>
-            <div class="photo"><img src="images/4.jpg" alt="Photo 4" /></div>
-            <div class="photo"><img src="images/5.jpg" alt="Photo 5" /></div>
-            <div class="photo"><img src="images/7.jpg" alt="Photo 7" /></div>
-          </div>
-        </div>
-        <div id="kowalskiPhotoBoxContainer">
-          <a id="kowalskiPhotoBoxLink" href="">Kowalski</a>
-          <div id="kowalskiPhotoBox">
-            <div class="photo"><img src="images/8.jpg" alt="Photo 8" /></div>
-            <div class="photo"><img src="images/10.jpg" alt="Photo 10" /></div>
-          </div>
-        </div>
-        <div id="jaworskiPhotoBoxContainer">
-          <a id="jaworskiPhotoBoxLink" href="">Jaworski</a>
-          <div id="jaworskiPhotoBox">
-            <div class="photo"><img src="images/6.jpg" alt="Photo 6" /></div>
-          </div>
         </div>
       </div>
     </main>
