@@ -6,13 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Maps Playground</title>
     <link rel="stylesheet" href="css/default.css" type="text/css" />
-    <script src="https://maps.googleapis.com/maps/api/js?key=&libraries=places"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBrJ554PTXvcs0wARbCs74L7_ou8DuojYE&libraries=places"></script>
   </head>
   <body>
     <main>
       <div id="firstSection">
         <div id="addressHeader">
-          <label for="address">Enter an Address:</label>
           <input type="text" id="address" placeholder="Enter an address" />
           <button onclick="geocodeAddress()">Geocode</button>
         </div>
@@ -169,7 +168,6 @@
                           const jaworskiMarker = new google.maps.Marker({
                             map: mainMap,
                             position: jaworskiPosition,
-
                             icon: svgMarker,
                           })
 
@@ -266,10 +264,13 @@
         </div>
       </div>
 
-      <button id="mapsOpener" onclick="toggleGrid()">Toggle Grid</button>
+      
       <div>
+        
         <div id="secondSection">
-          <!--  ENGLAND    -->
+          <button id="mapsOpener" onclick="toggleGrid()">Toggle Grid</button>
+          <div id="mapGrid">
+            <!--  ENGLAND    -->
 
           <figure id="englandMap" class="individualThumbnail">
             <script>
@@ -786,6 +787,9 @@
 
           </figure>
         </div>
+
+          </div>
+          
       </div>
     </main>
   </body>
