@@ -9,17 +9,70 @@
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBrJ554PTXvcs0wARbCs74L7_ou8DuojYE&libraries=places"></script>
   </head>
   <body>
+    <script>
+      // Creating before implementation in the HTML just below
+      function updateMapTitle(title) {
+        const mapTitleContainer = document.getElementById("mapTitleContainer");
+        // Clear existing content
+        mapTitleContainer.innerHTML = "";
+        // Create a new h1 element
+        const titleElement = document.createElement("h1");
+        titleElement.textContent = title;
+        // Append the title element to the container
+        mapTitleContainer.appendChild(titleElement);
+}
+      function toggleMap() {
+        // Get the current map center coordinates
+        const currentCenter = mainMap.getCenter();
+        
+        // Define paternal and maternal positions
+        const paternalPosition = {
+            // Poland
+            lat: 50.71701073689486, 
+            lng: 23.25266726539446
+        };
+        const maternalPosition = {
+            // Austria
+            lat: 47.446549238431835,
+            lng: 12.31552162186055
+        };
+
+        // Check if the current map center matches the paternal position
+        if (currentCenter.lat() === paternalPosition.lat && currentCenter.lng() === paternalPosition.lng) {
+            // Set the map to maternal position
+            mainMap.setCenter(maternalPosition);
+            updateMapTitle("Kirchberg, Austria");
+            // Change button text to "Paternal"
+            document.getElementById('toggleButton').innerText = "Fly to Zamosc, Poland";
+            // Change background color to dark purple
+            document.body.style.backgroundColor = "#3a0070";
+        } else {
+            // Set the map to paternal position
+            mainMap.setCenter(paternalPosition);
+            updateMapTitle("Zamosc, Poland");
+            // Change button text to "Maternal"
+            document.getElementById('toggleButton').innerText = "Fly to Kirchberg, Austria";
+            // Change background color to dark blue
+            document.body.style.backgroundColor = "#002d72";
+        }
+    }
+
+    function initializeMapTitle() {
+    // Set the initial map title
+    updateMapTitle("Zamosc, Poland");
+}
+  </script>
     <main>
       <div id="firstSection">
         <div id="header">
           <div id="lineageContainer">
+            <div id="toggleContainer">
+              <button id="toggleButton" onclick="toggleMap()">Go to Kirchberg, Austria</button>
+          </div>
+          </div>
 
-            <div id="paternalContainer">
-              <button id="paternalButton" onclick="toPaternal()">Paternal</button>
-            </div>
-            <div id="maternalContainer">
-              <button id="maternalButton" onclick="toMaternal()">Maternal</button>
-            </div>
+          <div id="mapTitleContainer">
+            <h1>Zamosc, Poland</h1>
           </div>
         
           <div id="addressHeader">
@@ -30,7 +83,10 @@
         </div>
         
         
-        <div id="map"></div>
+      
+        <div id="map">
+          
+        </div>
       </div>
     </main>
     
@@ -40,47 +96,26 @@
 
       
       async function initMainMap() {
-        
+      
         const mainMapPosition = {
-          // Poland
-          lat: 50.71549008719423, 
-          lng: 23.28688608641477,
           // Austria
           lat: 47.446549238431835,
-            lng: 12.31552162186055
+          lng: 12.31552162186055,
+          // Poland
+          lat: 50.71701073689486, 
+          lng: 23.25266726539446,
+          
         };
 
-
-
-        
         mainMap = new google.maps.Map(document.getElementById("map"), {
-          zoom: 14,
+          zoom: 13,
           center: mainMapPosition,
           heading: 0,
           tilt: 47.5,
           mapId: "dc8fe6b345586f78",
           mapTypeId: google.maps.MapTypeId.SATELLITE,
         });
-
-        function toMaternal() {
-        const maternalPosition = {
-            lat: 47.446549238431835,
-            lng: 12.31552162186055
-        };
-        mainMap.setCenter(maternalPosition);
-    }
-
-    // Function to navigate to paternal information
-    function toPaternal() {
-        const paternalPosition = {
-            lat: 50.71549008719423,
-            lng: 23.28688608641477
-        };
-        mainMap.setCenter(paternalPosition);
-    }
-        
-        
-    
+      
         // Create a polygon overlay
         const zamoscPolygon = new google.maps.Polygon({
           paths: [
@@ -277,7 +312,6 @@
 
       <div>
         <div id="secondSection">
-          <button id="mapsOpener" onclick="toggleGrid()">Toggle Grid</button>
           <div id="mapGrid">
             <!--  ENGLAND    -->
 
