@@ -6,16 +6,16 @@ body {
 #firstSection {
     height: 1300px;
     background-color: rgba(20, 46, 44, 0.891);
-    background: radial-gradient(circle, #68665b, #181818fc);
+    background: radial-gradient(circle, #4d4b43, #181818fc);
 }
 
 #secondSection {
-    background: radial-gradient(circle, #7a7e79, #171717);
+    background: radial-gradient(circle, #4d4b43, #181818fc);
 }
 
 #thirdSection {
     height: 100vh;
-    background: radial-gradient(circle, #7a7e79, #171717);
+    background: radial-gradient(circle, #4d4b43, #181818fc);
 }
 
 #mapGrid {
@@ -41,8 +41,6 @@ body {
     margin-left: auto;
     margin-right: auto;
     width: 75%;
-    border-radius: 10px;
-    background-color: whitesmoke;
     color: rgba(236, 237, 237, 0.724);
     background: linear-gradient(to left, #2c3d4f, #5d737d);
     border: 0px solid black;
@@ -53,7 +51,7 @@ body {
     letter-spacing: 0.01em;
     box-shadow: 8px 8px 11px black;
     cursor: pointer;
-    transition: background 5s ease;
+    margin-bottom: 2em;
 }
 
 #mapsOpener:hover {
@@ -62,14 +60,19 @@ body {
 
 }
 
+#header {
+    display: flex;
+    justify-content: space-between;
+}
+
 #addressHeader {
     display: flex;
     flex-direction: column;
+    float: right;
+    padding: 2em;
     justify-content: center;
     align-items: center;
     text-align: center;
-    padding-right: 5%;
-    padding-top: 4%;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
@@ -85,8 +88,8 @@ body {
     background-color: rgba(41, 41, 41, 0.918);
     color: rgb(223, 223, 223);
     padding: 0.5em;
-    margin: 2em;
-    width: 500px;
+    margin: 1em;
+    width: 22rem;
     border: 1px solid black;
     border-radius: 4px;
     font-size: 15px;
@@ -95,22 +98,51 @@ body {
 
 #addressHeader button {
     color: rgba(236, 237, 237, 0.724);
-    background: linear-gradient(to left, #2c3d4f, #5d737d);
+    background: linear-gradient(to left, #222629, #6f7070, rgb(189, 187, 187));
     border: 0px solid black;
     border-radius: 50px;
     font-weight: 100;
-    padding: 1em;
-    width: 300px;
+    padding: 0.5em;
+    margin-left: 25%;
+    width: 200px;
     font-size: 12px;
     letter-spacing: 0.01em;
-    box-shadow: 8px 8px 11px black;
+    box-shadow: 1px 1px 11px black;
     cursor: pointer;
     transition: background 5s ease;
 }
 
+
+
 #addressHeader button:hover {
-    background: linear-gradient(to right, #2c3d4fd3, #4a8cabd7);
+    background: linear-gradient(to right, #222629, #515151, rgb(112, 111, 111));
+    box-shadow: 8px 8px 11px black;
+}
+
+
+
+#lineageContainer button {
+    color: rgba(236, 237, 237, 0.724);
+    background: linear-gradient(to right, #222629, #515151, rgb(112, 111, 111));
+    border: 0px solid black;
+    border-radius: 50px;
+    font-weight: 100;
+    padding: 0.5em;
+    margin-left: 25%;
+    width: 200px;
+    font-size: 12px;
+    letter-spacing: 0.01em;
+    box-shadow: 8px 8px 11px black;
+    cursor: pointer;
+    transition: 0.7s ease all;
+    padding: 1em;
+    margin: 1em;
+
+}
+
+#lineageContainer button:hover {
     box-shadow: 1px 1px 11px black;
+    background: linear-gradient(to left, #222629, #6f7070, rgb(189, 187, 187)
 }
 
 
