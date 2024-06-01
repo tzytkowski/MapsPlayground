@@ -36,7 +36,7 @@
             lat: 47.446549238431835,
             lng: 12.31552162186055
         };
-
+        var h1Element = document.querySelector('#mapTitleContainer h1');
         // Check if the current map center matches the paternal position
         if (currentCenter.lat() === paternalPosition.lat && currentCenter.lng() === paternalPosition.lng) {
             // Set the map to maternal position
@@ -45,7 +45,8 @@
             // Change button text to "Paternal"
             document.getElementById('toggleButton').innerText = "Fly to Zamosc, Poland";
             // Change background color to dark purple
-            document.body.style.backgroundColor = "#3a0070";
+            document.body.style.backgroundColor = "#011409";
+            document.h1.style.color = "#ffffff";
         } else {
             // Set the map to paternal position
             mainMap.setCenter(paternalPosition);
@@ -53,7 +54,12 @@
             // Change button text to "Maternal"
             document.getElementById('toggleButton').innerText = "Fly to Kirchberg, Austria";
             // Change background color to dark blue
-            document.body.style.backgroundColor = "#002d72";
+            document.body.style.backgroundColor = "#280206";
+            // Select the <h1> element inside the #mapTitleContainer
+
+
+// Change the color of the <h1> element
+h1Element.style.color = "#ffffff";
         }
     }
 
@@ -79,14 +85,9 @@
             <input type="text" id="address" placeholder="Enter an address" />
             <button onclick="geocodeAddress()">Geocode</button>
           </div>
-
         </div>
-        
-        
       
-        <div id="map">
-          
-        </div>
+        <div id="map"></div>
       </div>
     </main>
     
@@ -94,7 +95,7 @@
       let mainMap;
       let geocoder;
 
-      
+
       async function initMainMap() {
       
         const mainMapPosition = {
@@ -104,11 +105,10 @@
           // Poland
           lat: 50.71701073689486, 
           lng: 23.25266726539446,
-          
         };
-
+        
         mainMap = new google.maps.Map(document.getElementById("map"), {
-          zoom: 13,
+          zoom: 12,
           center: mainMapPosition,
           heading: 0,
           tilt: 47.5,
@@ -117,7 +117,7 @@
         });
       
         // Create a polygon overlay
-        const zamoscPolygon = new google.maps.Polygon({
+        const oldZamoscPolygon = new google.maps.Polygon({
           paths: [
             { lat: 50.716275795630104, lng: 23.257917678090188 },
             { lat: 50.715915307683396, lng: 23.256823753032066 },
@@ -138,14 +138,91 @@
             { lat: 50.71851864568982, lng: 23.25643641947088 },
             { lat: 50.71687002241735, lng: 23.25695835137462 }
           ],
-          strokeColor: "#FFFF8F",
+          strokeColor: "#DC143C",
           strokeOpacity: 0.8,
           strokeWeight: 1,
+          fillColor: "#ffffff",
+          fillOpacity: 0.7,
+        });
+        oldZamoscPolygon.setMap(mainMap);
+
+        const zamoscPolygon = new google.maps.Polygon({
+          paths: [
+          { lat: 50.696173462123305, lng: 23.23597063925555 },
+                    { lat: 50.69225287748625, lng: 23.258614484382523 },
+                    { lat: 50.696809381125014, lng: 23.2742333802748 },
+                    { lat: 50.70473575544402, lng: 23.285914333775793 },
+                    { lat: 50.71614083390661, lng: 23.29503131499547 },
+                    { lat: 50.722869808441345, lng: 23.306719012170817 },
+                    { lat: 50.744389749951004, lng: 23.30625011992918 },
+                    { lat: 50.74854296614624, lng: 23.271902568468388 },
+                    { lat: 50.75007677772274, lng: 23.24184393076705 },
+                    { lat: 50.74437158036356,  lng: 23.239778574563285 },
+                    { lat: 50.74040520562363, lng: 23.238058396220353 },
+                    { lat: 50.73279960938883, lng: 23.229296315794112 },
+                    { lat: 50.72410729048463, lng: 23.21298336044141 },
+                    { lat: 50.71530453628187, lng: 23.205430173901533 },
+                    { lat: 50.702805771638964, lng: 23.220702565550226 },
+                    { lat: 50.701935531195396, lng: 23.226364855817124 },
+                    { lat: 50.696282143128876, lng: 23.235970703362383 }
+          ],
+          strokeColor: "#ffffff",
+          strokeOpacity: 0.9,
+          strokeWeight: 1,
           fillColor: "#DC143C",
-          fillOpacity: 0.4,
+          fillOpacity: 0.3,
         });
         zamoscPolygon.setMap(mainMap);
-    
+
+        const jaworskiPolygon = new google.maps.Polygon({
+          paths: [
+            { lat: 50.76974880244568, lng: 23.344659122955772 },
+            { lat: 50.766219460020494, lng: 23.34362741951013 },
+            { lat: 50.766069867282695, lng: 23.34518525329857 },
+            { lat: 50.76955791784727, lng: 23.34600707767394 },
+            { lat: 50.76975737043372, lng: 23.344689783831562 },
+          ],
+          strokeColor: "#0bd0bd",
+          strokeOpacity: 0.9,
+          strokeWeight: 1,
+          fillColor: "#5A0BD0",
+          fillOpacity: 0.2,
+        });
+        jaworskiPolygon.setMap(mainMap);
+
+        const zytkowskiPolygon = new google.maps.Polygon({
+          paths: [
+            { lat: 50.80787381158466, lng: 23.313666904692667 },
+            { lat: 50.80910599715215, lng: 23.3118029507141 },
+            { lat: 50.81150439181291, lng: 23.313424935621242 },
+            { lat: 50.8109586117335, lng: 23.315706806467308 },
+            { lat: 50.808023515071845, lng: 23.313365847461586 },
+          ],
+          strokeColor: "#FFFDA8",
+          strokeOpacity: 0.9,
+          strokeWeight: 1,
+          fillColor: "#4BE6E0",
+          fillOpacity: 0.4,
+        });
+        zytkowskiPolygon.setMap(mainMap);
+
+        const kowalskiPolygon = new google.maps.Polygon({
+          paths: [
+            { lat: 50.842511413756185, lng: 23.41543631662154 },
+            { lat: 50.84422151960513, lng: 23.4167818629447888 },
+            { lat: 50.84398542338633, lng: 23.417988356903027 },
+            { lat: 50.84217741590551, lng: 23.417129516643968 },
+            { lat: 50.842523518564846, lng: 23.415467887432072 },
+          ],
+          strokeColor: "#0bd0bd",
+          strokeOpacity: 0.9,
+          strokeWeight: 1,
+          fillColor: "#d00b1e",
+          fillOpacity: 0.3,
+        });
+        kowalskiPolygon.setMap(mainMap);
+
+        // Creating marker object
         const svgMarker = {
           path: "M-1.547 12l6.563-6.609-1.406-1.406-5.156 5.203-2.063-2.109-1.406 1.406zM0 0q2.906 0 4.945 2.039t2.039 4.945q0 1.453-0.727 3.328t-1.758 3.516-2.039 3.070-1.711 2.273l-0.75 0.797q-0.281-0.328-0.75-0.867t-1.688-2.156-2.133-3.141-1.664-3.445-0.75-3.375q0-2.906 2.039-4.945t4.945-2.039z",
           fillColor: "red",
@@ -155,8 +232,8 @@
           scale: 4,
           anchor: new google.maps.Point(12, 24), // Adjusted anchor point
         };
-        
-        const zamoscPosition = {
+
+        const oldZamoscPosition = {
           lat: 50.71708424784922, 
           lng: 23.252862792486702
 
@@ -172,13 +249,13 @@
         };
     
         const jaworskiPosition = {
-          lat: 50.770511006234656,
-          lng: 23.338329312666872
+          lat: 50.76970083560949, 
+          lng: 23.345349415867396
         };
 
-        const zamoscMarker = new google.maps.Marker({
+        const oldZamoscMarker = new google.maps.Marker({
           map: mainMap,
-          position: zamoscPosition,
+          position: oldZamoscPosition,
 
         });
         const kowalskiMarker = new google.maps.Marker({
@@ -200,7 +277,7 @@
         });
 
         // Adding field content when marker is clicked
-        const zamoscContent =
+        const oldZamoscContent =
         '<div id="siteNotice">' +
         "</div>" +
         '<h1 id="firstHeading" class="firstHeading" style="text-align: center">Zamosc, Poland</h1>' +
@@ -249,12 +326,12 @@
 
 
           // Establishing the info boxes
-          const zamoscInfoBox = new google.maps.InfoWindow({
-            content: zamoscContent,
+          const oldZamoscInfoBox = new google.maps.InfoWindow({
+            content: oldZamoscContent,
             maxWidth: 300,
           });
-          zamoscMarker.addListener("click", () => {
-            zamoscInfoBox.open(mainMap, zamoscMarker);
+          oldZamoscMarker.addListener("click", () => {
+            oldZamoscInfoBox.open(mainMap, oldZamoscMarker);
           })
         const zytkowskiInfoBox = new google.maps.InfoWindow({
           content: zytkowskiFamilyContent,
@@ -830,6 +907,16 @@
             </figure>
           </div>
         </div>
+      </div>
+      <div>
+        <img src="images/1.jpg" width="500px" height="auto">
+        <img src="images/3.jpg" width="500px" height="auto">
+        <div>
+          <img src="images/4.jpg" width="500px" height="auto">
+        <img src="images/2.jpg" width="500px" height="auto">
+
+        </div>
+        
       </div>
     </main>
   </body>
