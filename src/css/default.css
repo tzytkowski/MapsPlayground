@@ -4,15 +4,17 @@ body {
     margin-right: auto;
     width: 95vw;
     background-color: #280206;
+    justify-content: center;
+    align-items: center;
+
     
     
 }
 
 
 #firstSection {
-    height: 99vh;
-    padding: 4em;
-    margin-top: -3em;
+    height: 111vh;
+    margin-top: -1em;
     background: radial-gradient(circle, #4d4b43, #181818fc);
     box-shadow: 2px 2px 22px rgba(16, 16, 16, 0.734);
 }
@@ -77,16 +79,17 @@ body {
     display: flex;
     flex-direction: column;
     float: right;
-    padding: 0.5em;
+    font-size: 9px;
     justify-content: center;
     align-items: center;
     text-align: center;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
+
 }
 
 #addressHeader label {
     color: rgb(209, 209, 209);
-    font-size: 22px;
+    font-size: 11px;
     letter-spacing: 0.2em;
     text-align: center;
     font-weight: 700;
@@ -97,23 +100,21 @@ body {
     color: rgb(223, 223, 223);
     padding: 0.5em;
     margin: 1em;
+    padding: 1em;
     width: 22rem;
     border: 1px solid black;
     border-radius: 4px;
-    font-size: 15px;
+    font-size: 12px;
     letter-spacing: 0.2em;
 }
 
 #addressHeader button {
     color: rgba(236, 237, 237, 0.724);
-    background: linear-gradient(to left, #222629, #6f7070, rgb(189, 187, 187));
-    border: 0px solid black;
-    border-radius: 50px;
-    font-weight: 100;
-    padding: 0.5em;
-    margin-left: 25%;
-    width: 200px;
-    font-size: 12px;
+    background: linear-gradient(to right, #2b2b2b, #515151, #2e2e2e);
+
+
+    
+
     letter-spacing: 0.01em;
     box-shadow: 8px 8px 11px black;
     cursor: pointer;
@@ -123,21 +124,55 @@ body {
 
 
 #addressHeader button:hover {
-    background: linear-gradient(to left, #222629, #6f7070, rgb(189, 187, 187));
     box-shadow: 1px 1px 11px black;
 }
 
 
 
-#lineageContainer button {
+#header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+#header button {
     color: rgba(236, 237, 237, 0.724);
-    background: linear-gradient(to right, #222629, #515151, rgb(112, 111, 111));
+    background: linear-gradient(to right, #2b2b2b, #515151, #2e2e2e);
     border: 0px solid black;
     border-radius: 50px;
     font-weight: 100;
-    padding: 0.5em;
-    margin-left: 25%;
+    
+    width: 500px;
+    font-size: 12px;
+    letter-spacing: 0.5em;
+    box-shadow: 8px 8px 11px black;
+    cursor: pointer;
+    transition: 0.7s ease all;
+    padding: 1em;
+    margin: 1em;
+    letter-spacing: 0.1em;
+}
+
+#header button {
+    transition: 0.7s ease all;
+    box-shadow: 8px 8px 11px black;
     width: 200px;
+
+}
+
+#header button:hover {
+    box-shadow: 1px 1px 11px black;
+}
+
+
+#lineageContainer button {
+    color: rgba(236, 237, 237, 0.724);
+    background: linear-gradient(to right, #2b2b2b, #515151, #2e2e2e);
+    border: 0px solid black;
+    border-radius: 50px;
+    font-weight: 100;
+    margin-left: 25%;
+    width: 300px;
     font-size: 12px;
     letter-spacing: 0.01em;
     box-shadow: 8px 8px 11px black;
@@ -145,6 +180,7 @@ body {
     transition: 0.7s ease all;
     padding: 1em;
     margin: 1em;
+    letter-spacing: 0.1em;
 
 }
 
@@ -161,10 +197,25 @@ body {
 
 
 #mapTitleContainer {
-    margin-left: 10%;
+
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+ 
 }
 
 #mapTitleContainer h1 {
+    color: rgb(194, 191, 191);
+
+    letter-spacing: 0.2em;
+    font-variant: small-caps;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  
+}
+
+#mapTitleContainer h3 {
     color: rgb(194, 191, 191);
     letter-spacing: 0.2em;
     font-variant: small-caps;
@@ -175,18 +226,7 @@ body {
 
 
 @media only screen and (max-width: 1200px) {
-    body {
-        background-color: blue;
-       
-        
-        
-    }
     
-    
-    #firstSection {
-        
-        
-    }
     
     #secondSection {
       
@@ -199,8 +239,8 @@ body {
     #mapGrid {
         height: 90vh;    
         display: grid;
-        grid-template-columns: repeat(3, 1fr); /* 5 columns */
-        grid-template-rows: repeat(2, 1fr); /* 5 rows */
+        grid-template-columns: 1fr; /* 1 column */
+        grid-template-rows: repeat(5, 1fr); /* 5 rows */
     }
     
     #map {
@@ -309,15 +349,5 @@ body {
     }
     
     
-    #mapTitleContainer {
-        margin-left: 10%;
-    }
-    
-    #mapTitleContainer h1 {
-        color: rgb(194, 191, 191);
-        letter-spacing: 0.2em;
-        font-variant: small-caps;
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        margin-top: 1.4em;
-    }
+
   }

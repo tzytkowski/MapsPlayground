@@ -10,6 +10,17 @@
   </head>
   <body>
     <script>
+
+      // Current date
+      var currentDate = new Date();
+    var currentMonth = currentDate.getMonth() + 1;
+    var currentDay = currentDate.getDate();
+    var currentYear = currentDate.getFullYear();
+
+    // Set the current date to the map title container
+    var dateElement = document.getElementById("mapTitleContainer");
+    dateElement.innerHTML += "<h6>Current Date: " + currentMonth + "/" + currentDay + "/" + currentYear + "</h6>";
+
       // Creating before implementation in the HTML just below
       function updateMapTitle(title) {
         const mapTitleContainer = document.getElementById("mapTitleContainer");
@@ -42,15 +53,18 @@
             // Set the map to maternal position
             mainMap.setCenter(maternalPosition);
             updateMapTitle("Kirchberg, Austria");
+            
             // Change button text to "Paternal"
             document.getElementById('toggleButton').innerText = "Fly to Zamosc, Poland";
             // Change background color to dark purple
             document.body.style.backgroundColor = "#011409";
             document.h1.style.color = "#ffffff";
+            
         } else {
             // Set the map to paternal position
             mainMap.setCenter(paternalPosition);
             updateMapTitle("Zamosc, Poland");
+            
             // Change button text to "Maternal"
             document.getElementById('toggleButton').innerText = "Fly to Kirchberg, Austria";
             // Change background color to dark blue
@@ -58,34 +72,41 @@
             // Select the <h1> element inside the #mapTitleContainer
 
 
-// Change the color of the <h1> element
-h1Element.style.color = "#ffffff";
-        }
-    }
+          // Change the color of the <h1> element
+          h1Element.style.color = "#ffffff";
+                  }
+              }
 
-    function initializeMapTitle() {
-    // Set the initial map title
-    updateMapTitle("Zamosc, Poland");
+              function initializeMapTitle() {
+              // Set the initial map title
+              updateMapTitle("Zamosc, Poland");
 }
   </script>
     <main>
       <div id="firstSection">
         <div id="header">
           <div id="lineageContainer">
-            <div id="toggleContainer">
-              <button id="toggleButton" onclick="toggleMap()">Go to Kirchberg, Austria</button>
+            
+            <div id="addressHeader">
+              <input type="text" id="address" placeholder="Enter an address" />
+              <button onclick="geocodeAddress()">Geocode</button>
+            </div>
+
+            
+            
+          </div>
+          <div id="mapTitleContainer">
+            <!-- <h3 id="header3">Paternal Family Lineage</h3> -->
+            <h1>Zamosc, Poland</h1>
+          </div>
+          <div id="toggleContainer">
+            <button id="toggleButton" onclick="toggleMap()">Go to Kirchberg, Austria</button>
           </div>
           </div>
 
-          <div id="mapTitleContainer">
-            <h1>Zamosc, Poland</h1>
-          </div>
+          
         
-          <div id="addressHeader">
-            <input type="text" id="address" placeholder="Enter an address" />
-            <button onclick="geocodeAddress()">Geocode</button>
-          </div>
-        </div>
+          
       
         <div id="map"></div>
       </div>
