@@ -55,10 +55,10 @@
             updateMapTitle("Kirchberg, Austria");
             
             // Change button text to "Paternal"
-            document.getElementById('toggleButton').innerText = "Fly to Zamosc, Poland";
+            document.getElementById('toggleButton').innerText = "Go to Zamosc, Poland";
             // Change background color to dark purple
             document.body.style.backgroundColor = "#011409";
-            document.h1.style.color = "#ffffff";
+
             
         } else {
             // Set the map to paternal position
@@ -66,14 +66,11 @@
             updateMapTitle("Zamosc, Poland");
             
             // Change button text to "Maternal"
-            document.getElementById('toggleButton').innerText = "Fly to Kirchberg, Austria";
+            document.getElementById('toggleButton').innerText = "Go to Kirchberg, Austria";
             // Change background color to dark blue
             document.body.style.backgroundColor = "#280206";
             // Select the <h1> element inside the #mapTitleContainer
 
-
-          // Change the color of the <h1> element
-          h1Element.style.color = "#ffffff";
                   }
               }
 
@@ -85,15 +82,9 @@
     <main>
       <div id="firstSection">
         <div id="header">
-          <div id="lineageContainer">
-            
-            <div id="addressHeader">
-              <input type="text" id="address" placeholder="Enter an address" />
-              <button onclick="geocodeAddress()">Geocode</button>
-            </div>
-
-            
-            
+          <div id="addressHeader">
+            <input type="text" id="address" placeholder="Enter an address" />
+            <button onclick="geocodeAddress()">Search places</button>
           </div>
           <div id="mapTitleContainer">
             <!-- <h3 id="header3">Paternal Family Lineage</h3> -->
@@ -103,11 +94,6 @@
             <button id="toggleButton" onclick="toggleMap()">Go to Kirchberg, Austria</button>
           </div>
           </div>
-
-          
-        
-          
-      
         <div id="map"></div>
       </div>
     </main>
