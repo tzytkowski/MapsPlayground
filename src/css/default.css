@@ -21,7 +21,7 @@ body {
 
 #thirdSection {
     height: 100vh;
-    background: radial-gradient(circle, #4d4b43, #181818fc);
+    background: radial-gradient(circle, #4d4b43, #122d5aa8);
 }
 
 #mapGrid {
@@ -68,13 +68,13 @@ body {
 
 #header {
     display: flex;
-    justify-content: space-between;
+
 }
 
 #addressHeader {
     display: flex;
     flex-direction: row;
-    float: right;
+    margin-left: 22rem;
     font-size: 9px;
     justify-content: center;
     align-items: center;
@@ -94,18 +94,18 @@ body {
 #addressHeader input {
     background-color: rgba(41, 41, 41, 0.918);
     color: rgb(188, 151, 151);
-    padding: 0.5em;
+    padding: 0.2em;
     margin: 1em;
     padding: 1em;
     width: 22rem;
     border: px solid black;
     border-radius: 4px;
-    font-size: 12px;
+    font-size: 8px;
     letter-spacing: 0.2em;
 }
 
 #addressHeader button {
-    font-size: 9px;
+    font-size: 8px;
     width: 7em;
     color: rgba(236, 237, 237, 0.724);
     background: linear-gradient(to right, #2b2b2b8a, #51515190, #2e2e2e8a);
@@ -167,17 +167,24 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
  
 }
 
 #mapTitleContainer h1 {
     color: rgb(194, 191, 191);
-    letter-spacing: 0.2em;
-    font-variant: small-caps;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    margin-top: 1em;
-  
+    letter-spacing: 0.22em;
+    font-weight: 100;
+    
 }
+#mapTitleContainer h2 {
+    color: rgb(194, 191, 191);
+    letter-spacing: 0.22em;
+    font-weight: 100;
+    margin-bottom: 0.0em;
+}
+
 
 #toggleContainer {
     margin-top: -1em;
@@ -185,12 +192,12 @@ body {
 }
 
 
-@media only screen and (max-width: 1200px) {
+@media only screen and (max-width: 1800px) {
     #mapGrid {
         height: 90vh;    
         display: grid;
         grid-template-columns: 1fr; /* 1 column */
-        grid-template-rows: repeat(5, 1fr); /* 5 rows */
+        grid-template-rows: repeat(6, 1fr); /* 6 rows */
     }
 
     #mapsOpener:hover {
