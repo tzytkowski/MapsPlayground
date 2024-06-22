@@ -3,14 +3,15 @@ body {
     margin-left: auto;
     margin-right: auto;
     width: 95vw;
+    margin-top: -1em;
     background-color: #280206;
     justify-content: center;
     align-items: center;
+    
 }
 
 #firstSection {
     height: 111vh;
-    margin-top: -1em;
     background: radial-gradient(circle, #4d4b43, #181818fc);
     box-shadow: 2px 2px 22px rgba(16, 16, 16, 0.734);
 }
@@ -68,19 +69,46 @@ body {
 
 #header {
     display: flex;
-
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    padding: 1em;
 }
+#header button {
+    color: rgba(236, 237, 237, 0.724);
+    background: linear-gradient(to right, #181818fc, #4d4b43);
+    border: 1px solid black;
+    border-radius: 22px;
+    font-weight: 100;
+    font-size: 11px;
+    box-shadow: 8px 8px 11px black;
+    cursor: pointer;
+    transition: 0.5s ease all;
+    padding: 1em;
+    margin: 1em;
+    letter-spacing: 0.15em;
+    box-shadow: 8px 8px 4px black;
+    width: 200px;
+}
+
+#header button:hover {
+    box-shadow: 1px 1px 4px black;
+}
+
+#header button:active {
+    width: 175px;
+    letter-spacing: 0.05em;
+}
+
 
 #addressHeader {
     display: flex;
     flex-direction: row;
-    margin-left: 22rem;
     font-size: 9px;
     justify-content: center;
     align-items: center;
     text-align: center;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
-
 }
 
 #addressHeader label {
@@ -93,71 +121,65 @@ body {
 
 #addressHeader input {
     background-color: rgba(41, 41, 41, 0.918);
-    color: rgb(188, 151, 151);
+    color: rgb(236, 226, 193);
     padding: 0.2em;
     margin: 1em;
     padding: 1em;
-    width: 22rem;
-    border: px solid black;
+    width: 17rem;
+    border: 1px solid black;
     border-radius: 4px;
-    font-size: 8px;
+    font-size: 11px;
     letter-spacing: 0.2em;
+    border: 1px solid black;
+}
+
+textarea:focus, input:focus{
+    outline: none;
 }
 
 #addressHeader button {
     font-size: 8px;
-    width: 7em;
+    width: 150px;
     color: rgba(236, 237, 237, 0.724);
-    background: linear-gradient(to right, #2b2b2b8a, #51515190, #2e2e2e8a);
-    letter-spacing: 0.01em;
+    border: 1px solid black;
+    border-radius: 22px;
+    font-weight: 100;
+    font-size: 11px;
     box-shadow: 8px 8px 11px black;
     cursor: pointer;
-    transition: 0.7s ease all;
+    transition: 0.5s ease all;
+    padding: 1em;
+    margin: 1em;
+    letter-spacing: 0.15em;
+    box-shadow: 8px 8px 4px black;
+    width: 150px;
 }
 
 #addressHeader button:hover {
     box-shadow: 1px 1px 11px black;
 }
 
-#header {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+#addressHeader button:active {
+    width: 125px;
+    letter-spacing: 0.05em;
 }
-#header button {
-    color: rgba(236, 237, 237, 0.724);
-    background: linear-gradient(to right, #2b2b2b8a, #51515190, #2e2e2e8a);
-    border: 0px solid black;
-    border-radius: 50px;
-    font-weight: 100;
-    width: 500px;
-    font-size: 11px;
-    letter-spacing: 0.5em;
-    box-shadow: 8px 8px 11px black;
-    cursor: pointer;
-    transition: 0.7s ease all;
-    padding: 1em;
-    margin: 1em;
-    letter-spacing: 0.1em;
-}
-
-#header button {
-    transition: 0.7s ease all;
-    box-shadow: 8px 8px 11px black;
-    width: 200px;
-
-}
-
-#header button:hover {
-    box-shadow: 1px 1px 11px black;
-}
-
 
 .individualThumbnail {
     border-radius: 15px;
     box-shadow: 0 0 24px 2px black;
     border: 3px solid black;
+}
+
+#titleContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-top: 2em; 
+}
+
+#flagContainer {
+    padding: 1em;
 }
 
 
@@ -167,7 +189,7 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    
+
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
  
 }
@@ -176,19 +198,11 @@ body {
     color: rgb(194, 191, 191);
     letter-spacing: 0.22em;
     font-weight: 100;
-    
+    font-size: 3em;
 }
-#mapTitleContainer h2 {
-    color: rgb(194, 191, 191);
-    letter-spacing: 0.22em;
-    font-weight: 100;
-    margin-bottom: 0.0em;
-}
-
 
 #toggleContainer {
-    margin-top: -1em;
- 
+    margin-top: -1.4em;
 }
 
 
@@ -205,19 +219,10 @@ body {
         box-shadow: 1px 1px 11px black;
     }
     
-    #header {
-        display: flex;
-        justify-content: space-between;
-    }
     
     #addressHeader {
         display: flex;
         flex-direction: row;
-        float: right;
-        font-size: 9px;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
         font-family: Verdana, Geneva, Tahoma, sans-serif;
     
     }

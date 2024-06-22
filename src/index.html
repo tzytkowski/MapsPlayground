@@ -50,7 +50,7 @@
         var h1Element = document.querySelector('#mapTitleContainer h1');
         // Check if the current map center matches the paternal position
         if (currentCenter.lat() === paternalPosition.lat && currentCenter.lng() === paternalPosition.lng) {
-            // Set the map to maternal position
+            // AUSTRIA
             mainMap.setCenter(maternalPosition);
             updateMapTitle("Kirchberg, Austria");
             
@@ -58,6 +58,7 @@
             document.getElementById('toggleButton').innerText = "Go to Zamosc, Poland";
             // Change background color to dark purple
             document.body.style.backgroundColor = "#011409";
+            document.getElementById('flagPhoto').src = "images/austria.jpg";
 
             
         } else {
@@ -70,6 +71,7 @@
             // Change background color to dark blue
             document.body.style.backgroundColor = "#280206";
             // Select the <h1> element inside the #mapTitleContainer
+              document.getElementById('flagPhoto').src = "images/poland.jpg";
 
                   }
               }
@@ -82,20 +84,24 @@
     <main>
       <div id="firstSection">
         <div id="header">
+          <div id="titleContainer">
+            <div id="mapTitleContainer">
+              <!-- <h3 id="header3">Paternal Family Lineage</h3> -->
+              <h1>Zamosc, Poland</h1>
+            </div>
+            <div id="toggleContainer">
+              <button id="toggleButton" onclick="toggleMap()">Go to Kirchberg, Austria</button>
+            </div>
+            <div id="flagContainer">
+              <img src="images/poland.jpg" alt="Flag" id="flagPhoto" width="100px" height="auto" style="opacity: 0.8;">
+          </div>
+          </div>
+          
           <div id="addressHeader">
             <input type="text" id="address" placeholder="Enter an address" />
             <button id="addressButton" onclick="geocodeAddress()">Search places</button>
           </div>
-          
-          <div id="mapTitleContainer">
-            <h2>Ancestry</h2>
-            <!-- <h3 id="header3">Paternal Family Lineage</h3> -->
-            <h1>Zamosc, Poland</h1>
-          </div>
-          <div id="toggleContainer">
-            <button id="toggleButton" onclick="toggleMap()">Go to Kirchberg, Austria</button>
-          </div>
-          </div>
+        </div>
         <div id="map"></div>
       </div>
     </main>
