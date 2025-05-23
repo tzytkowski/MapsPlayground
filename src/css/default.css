@@ -195,14 +195,18 @@ textarea:focus, input:focus{
 }
 
 #mapTitleContainer h1 {
-    color: rgb(194, 191, 191);
+    color: rgba(194, 191, 191, 0.447);
     letter-spacing: 0.22em;
     font-weight: 100;
     font-size: 3em;
 }
 
 #toggleContainer {
-    margin-top: -1.4em;
+    margin-top: 1.4em;
+}
+
+#toggleButton {
+    background-color: rgb(234, 234, 234);
 }
 
 
